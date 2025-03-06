@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{base :: head}"></head>
+    
+    <body>
+        
+        
+        <div id="main-container">
+            <h1 th:text = "|Hello ${output.name}|">Hello User</h1>
+            <header th:replace="~{base :: header}"></header>
+            <h2 th:text="|Your current balance is ${output.amount}|">your current balance is 50000</h2>
+            <hr>
+            <div id="container-actions">
+                <a href="newrecord">New Record</a>
+                <a href="transactions">View Records</a>
+                <a href="changebalance">Change Balance</a>
+                <a href="signup">Reset Account</a>
+            </div>
+        </div>
+
+    </body>
+</html>

@@ -1,0 +1,167 @@
+body{
+    background-color: gai;
+}
+h1{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 40;   
+}
+h2{
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 32;   
+}
+
+#navbar{
+    margin: auto;
+    width: 50%;
+    position: relative;
+    
+}
+#navbar ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+li{
+    /* position: relative; */
+    /* left: 39.5%; */
+    list-style-type:none;
+    display: inline-block;
+    font-family: 'Segoe UI';
+    font-size:larger;
+}
+
+#main-container{
+    color: #252525;
+    /* align-items: center; */
+    width: 70%;
+    /* align-self: center; */
+    position: relative;
+    margin: auto;
+    font-family: 'Tahoma';
+    
+}
+#container-actions{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 50%;
+    margin:auto;
+}
+#container-actions a{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+p{
+    padding: 0 1 ;
+    
+}
+.form{
+    width: 40%;
+    border: #999 solid;
+    
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+    left: 30%;
+    font-size: 24px;
+    background-color: #EEE;
+}
+
+/* .form label{
+    position: relative;
+    width: 100%;
+    font-size: inherit;
+    padding: 2px;
+    margin: 5px;
+}
+*/
+.form input{
+    position: relative;
+    width: 100%;
+    font-size: inherit;
+    padding: 2px;
+    margin: 10px 0px;
+    /* min-height: ; */
+}
+.form-newrecord input{
+    position: relative;
+    width: 100%;
+    font-size: inherit;
+    padding: 2px;
+    margin: 10px 0px;
+    /* min-height: ; */
+}
+
+.form textarea{
+    position: relative;
+    width: 100%;
+    margin: 5px;
+}
+.radio input{
+    width: 40;
+    margin: 0;
+}
+
+#calc-display-top{
+    position: relative;
+    width: 100%;
+    font-size: inherit;
+    /* padding: 2px; */
+    margin-top: 5px;
+    background-color: #CCC;
+    text-align: end;
+    /* min-height: 50px; */
+}
+#calc-display-bottom{
+    position: relative;
+    width: 100%;
+    font-size: inherit;
+    /* padding: 2px; */
+    margin-bottom: 10px;
+    background-color: #CCC;
+    text-align: end;
+    /* min-height: 50px; */
+}
+.button-row{
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 80px));
+    gap: 10px;
+    margin: 10px 0;
+}
+.button-row button{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+#container-types{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}

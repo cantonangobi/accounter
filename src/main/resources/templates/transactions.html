@@ -1,0 +1,27 @@
+<html>
+    <head th:replace="~{base :: head}"></head>
+    
+    <body>
+        
+        
+        <div id="main-container">
+            <header th:replace="~{base :: header}"></header>
+            <h2>Transaction History</h2>
+            <hr>
+            <table>
+                <tr>
+                    <th>Record Type</th>
+                    <th>Amount</th>
+                    <th>Running balance</th>
+                </tr>
+                <tr th:each="row: ${rows}">
+                    <td th:text="${row.type}">expense</td>
+                    <td th:text="${row.amount}">1000</td>
+                    <td th:text="${row.balance}">5000</td>
+                </tr>
+                
+            </table>
+        </div>
+
+    </body>
+</html>
