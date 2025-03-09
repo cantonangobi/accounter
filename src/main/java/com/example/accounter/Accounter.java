@@ -4,128 +4,280 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Accounter {
-    public Account account;
-    // private String lastID;
-    private String accountFileName, transactionFileName;
-    private boolean accountLoaded; 
+    private User user;
+    // private Account account;
+    private List<Account> accounts;
+    private List<Transaction> transactions;
+    private String nextTxID;
+    private String nextAccID;
+    private String userFileName, accountFileName, transactionFileName;
+    private boolean userExists; 
 
 
     public Accounter(){
-        accountFileName = "account.csv";
-        transactionFileName = "transactions.csv";
-        accountLoaded = false;
+        accounts = new ArrayList<>();
+        userFileName = "users.csv";
+        accountFileName = "accounts.csv";
+        // transactionFileName = "";
+        nextAccID = "0";
+        nextTxID = "0";
+        userExists = false;
         load();
     }
 
     // public void createAccount(){
     //     account = new Account();    
     // }
-
-    public void createAccount(String name, double amount){
-        account = new Account("1", name, amount );    
-        save();
-        accountLoaded = true;
-    }
-
-    public void setBalance(double amount){
-        double difference = amount - account.getBalance();
-        account.setBalance(amount);
-        account.addTransaction("adjustment", difference);
+    public void createUser(String username, String email, String password){
+        user = new User(username, email, password);
+        userExists = true;
         save();
     }
 
-    public double getBalance(){
-        return account.getBalance();
+    public String getUserName() {
+        return user.getUsername();
     }
 
-    public void recordIncome(double amount){
-        account.setBalance(account.getBalance() + amount);
-        account.addTransaction("income", amount);
+    public void addAccount(String name, double amount){
+        generateAccID();
+        Account account = new Account(nextAccID, name, amount);
+        accounts.add(account);
         save();
+        // userExists = true;
+    }
+    
+    public Account getAccount(String accName){
+        for(Account account : accounts){
+            if (account.getAccountName().equals(accName)){
+                return account;
+            }
+        }
+        return null;
     }
 
-    public void recordExpense(double amount){
-        account.setBalance(account.getBalance() - amount);
-        account.addTransaction("expense", amount);
-        save();
+    public List<Account> getAccounts() {
+        return accounts;
     }
 
-    public void resetAccount(String name, double amount){
-        // lastID = String.valueOf(Integer.parseInt(lastID) + 1);
-        account = new Account(account.getUserID(),name,amount);
-        save();
-        accountLoaded = true;
+    // public boolean accountExists(String accID){
+    //     for(Account account : accounts){
+    //         if (account.getAccountID().equals(accID)){
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    public void setBalance(String accName, double amount){
+        Account account = getAccount(accName);
+        if (account != null){
+            double difference = amount - account.getBalance();
+       
+            if (difference > 0){
+                recordIncome(accName, difference);
+                }
+                else{
+                    recordExpense(accName, Math.abs(difference));
+                }
+        
+            save();
+        }
+        
     }
 
-    public ArrayList<Transaction> getTransactions(){
-        return account.geTransactions();
+    public double getBalance(String accName){
+        Account account = getAccount(accName);
+        if (account != null){
+            return account.getBalance();
+        }
+        return 0;
+    }
+
+    public void recordIncome(String accName, double amount){
+        Account account = getAccount(accName);
+        if (account != null){
+            account.setBalance(account.getBalance() + amount);
+            generateTxID();
+            account.addTransaction(nextTxID,"income", amount);
+            save();
+        }
+        
+    }
+
+    public void recordExpense(String accName, double amount){
+        Account account = getAccount(accName);
+        if (account != null){
+            account.setBalance(account.getBalance() - amount);
+            generateTxID();
+            account.addTransaction(nextTxID,"expense", amount);
+            save();
+        }
+
+    }
+
+    // public void resetAccount(String name, double amount){
+    //     // lastID = String.valueOf(Integer.parseInt(lastID) + 1);
+    //     account = new Account(account.getAccountID(),name,amount);
+    //     save();
+    //     userExists = true;
+    // }
+
+    public void generateTxID(){
+        nextTxID = String.valueOf(Integer.parseInt(nextTxID) + 1);
+    }
+    public void generateAccID(){
+        nextAccID = String.valueOf(Integer.parseInt(nextAccID) + 1);
+    }
+    public boolean userExists(){
+        return userExists;
+    }
+
+    public String getAccountName(String accID){
+        Account account = getAccount(accID);
+        if (account != null) {
+            return account.getAccountName();        
+        }
+        return "";
+    }
+
+    public List<Transaction> getTransactions(String accName){
+        Account account = getAccount(accName);
+        if (account != null) {
+            return account.geTransactions();        
+        }
+        return null;
     }
 
     private void save(){
-        // boolean append = false;
-        File file = new File(accountFileName);
-        String line = account.getUserID() + "," + account.getName() + "," + String.valueOf(account.getBalance() +"\n");
-        writeFile(file, line, false);
+        // File file = new File(userFileName);
+        String userFileContent = user.toString();
+        writeFile(userFileName, userFileContent, false);
 
-        file = new File(transactionFileName);
-        String content = "";
-        ArrayList<Transaction> transactions = account.geTransactions();
-        for (Transaction transaction : transactions) {
-            line = transaction.getID() + "," + transaction.getType() + "," + transaction.getAmount() + "," + transaction.getBalance() + "\n";
-            content = content + line;
+        // file = new File(accountFileName);
+        String accountFileContent = "";
+
+        for (Account account : accounts){
+            // String serializedAccount = ;
+            accountFileContent = accountFileContent + account.toString() +"\n";
             
+            transactionFileName = account.getAccountName() + "transactions.csv";
+            String transactionFileContent = "";
+            List<Transaction> transactions = account.geTransactions();
+            for (Transaction transaction : transactions) {
+                // String serializedTransaction = ;
+                transactionFileContent = transactionFileContent + transaction.toString() + "\n";    
+            }  
+            writeFile(transactionFileName, transactionFileContent, false);
+
         }
-        writeFile(file, content, false);
+        System.out.println(accountFileContent);
+        writeFile(accountFileName, accountFileContent, false);
+
+        // for (Account account: accounts){
+        //     transactionFileName = "transactions" + account.getAccountID() + ".csv";
+        //     file = new File(transactionFileName);
+        //     String transactionFileContent = "";
+        //     ArrayList<Transaction> transactions = account.geTransactions();
+        //     for (Transaction transaction : transactions) {
+        //         String line = transaction.getID() + "," + transaction.getAccountID() + "," + transaction.getType() + "," + transaction.getAmount() + "," + transaction.getBalance() + "\n";
+        //         transactionFileContent = transactionFileContent + line;    
+        //     }  
+        //     writeFile(file, transactionFileContent, false);
+        // }
+        
     }
     
 
     private void load(){ 
-        File file = new File(accountFileName);
         
-        if (file.isFile()) {
-            String line = readFile(file);
-            if (!line.isEmpty()){
-                String[] words = line.split(",");
-                account = new Account(words[0],words[1], Double.parseDouble(words[2]));
-                System.out.println(account.getName());
-                accountLoaded = true;
-            }
-        }
+        // if (!file.isFile()) {
+        //     return;
+        // }
 
-        file = new File(transactionFileName);
-        if (file.isFile()){
-            String content = readFile(file);
-            if (!content.isEmpty()){
-                ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-                String[] lines = content.split("\n");
-                for (String line : lines) {
-                    String[] words = line.split(",");
-                    transactions.add(new Transaction(words[0], words[1], Double.parseDouble(words[2]), Double.parseDouble(words[3])));
-                    account.setLastTXID(words[0]);
+        String userFileContent = readFile(userFileName);
+        if (userFileContent.isEmpty()) return;
+        String[] userAttributes = userFileContent.split(",");
+        user = new User(userAttributes[0], userAttributes[1], userAttributes[2], userAttributes[3]);
+        userExists = true;
+
+        // file = new File(accountFileName);
+        // if (!file.isFile()) {
+        //     return;
+        // }
+        
+        String accountFileContent = readFile(accountFileName);
+        if (accountFileContent.isEmpty()) return;
+        String[] accountFileLines = accountFileContent.split("\n");
+        for (String accountFileLine : accountFileLines){
+            if (!accountFileLine.isEmpty())
+            {
+                String[] accountAttributes = accountFileLine.split(",");
+                Account account = new Account(accountAttributes[0],accountAttributes[1], Double.parseDouble(accountAttributes[2]));
+                accounts.add(account);
+                if (Integer.parseInt(account.getAccountID()) > Integer.parseInt(nextTxID)){
+                    nextAccID = accountAttributes[0];
                 }
-                account.setTransactions(transactions);
+                    
 
+                transactionFileName = account.getAccountName() + "transactions.csv";
+                String transactionFileContent = readFile(transactionFileName);
+                if (!transactionFileContent.isEmpty())
+                {
+                    transactions = new ArrayList<Transaction>();
+                    String[] transactionFileLines = transactionFileContent.split("\n");
+                    for (String transactionFileLine : transactionFileLines) 
+                    {
+                        String[] transactionAttributes = transactionFileLine.split(",");
+                        Transaction transaction = new Transaction(transactionAttributes[0], transactionAttributes[1], transactionAttributes[2], Double.parseDouble(transactionAttributes[3]), Double.parseDouble(transactionAttributes[4]));
+                        transactions.add(transaction);
+                        if (Integer.parseInt(transaction.getTransactionID()) > Integer.parseInt(nextTxID))
+                        {
+                            nextTxID = transaction.getTransactionID();
+                        }
+                        
+                    }
+                    account.setTransactions(transactions);
+                }
+
+                
+
+                // System.out.println(account.getName());
             }
         }
+       
+
+        // file = new File(transactionFileName);
+        // if (!file.isFile()) {
+        //     return;
+        // }
+
+        
+        // String transactionFileContent = readFile(transactionFileName);
+        // if (accountFileContent.isEmpty()) return;
+        // transactions = new ArrayList<Transaction>();
+        // String[] transactionFileLines = transactionFileContent.split("\n");
+        // for (String line : transactionFileLines) {
+        //     String[] transactionAttributes = line.split(",");
+        //     Transaction transaction = new Transaction(transactionAttributes[0], transactionAttributes[1], transactionAttributes[2], Double.parseDouble(transactionAttributes[3]), Double.parseDouble(transactionAttributes[4]));
+        //     transactions.add(transaction);
+
+
+        //     nextTxID = transactionAttributes[0];
+        // }
+
+        
     }
 
-    public boolean accountExists(){
-        return accountLoaded;
-    }
-
-    public String getAccountName(){
-        return account.getName();
-    }
-
-    private void writeFile(File file, String line, boolean append){
+    
+    private void writeFile(String fileName, String content, boolean append){
         try {
-
-            FileWriter writer = new FileWriter(file, append);
-
-            writer.write(line);
+            File file = new File(fileName);
+            FileWriter writer = new FileWriter(file, false);
+            writer.write(content);
             writer.close();
             System.out.println("The file has been written in " + System.getProperty("user.dir"));
 
@@ -136,28 +288,32 @@ public class Accounter {
         
     }
 
-    private String readFile(File file){
-        String lines = "";
-        try{
-            Scanner reader = new Scanner(file);
-
-            // Traversing File Data
-              while (reader.hasNextLine()) {
-                lines = lines + reader.nextLine();
-                lines = lines + "\n";
+    private String readFile(String filename){
+        String content = "";
+        File file = new File(filename);
+        if (file.isFile()){
+            try{
+                Scanner reader = new Scanner(file);
+    
+                // Traversing File Data
+                  while (reader.hasNextLine()) {
+                    content = content + reader.nextLine() + "\n";
+                    // lines = lines + "\n";
+                }
+                // if (reader.hasNextLine()){
+                //     line = reader.nextLine();
+                // }
+                
+                reader.close();
+    
+            } catch (IOException e){
+                System.out.println("Something went wrong");
+                e.printStackTrace();
             }
-            // if (reader.hasNextLine()){
-            //     line = reader.nextLine();
-            // }
-            
-            reader.close();
-
-        } catch (IOException e){
-            System.out.println("Something went wrong");
-            e.printStackTrace();
         }
         
-        return lines;
+        
+        return content;
     }
 
 

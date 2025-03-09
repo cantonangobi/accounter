@@ -1,45 +1,55 @@
 package com.example.accounter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Account {
-    private String userID;
-    private String name;
+    private String accountID;
+    private String accountName;
     private double  balance;
-    private ArrayList<Transaction> transactions;
-    private String lastTXID = "0";
+    // private double totalIncome;
+    // private double totalExpenses;
+    private List<Transaction> transactions;
+    // private String lastTXID = "0";
+    // private String lastAccID = "0";
 
-    public Account(){
-        // lastTXID = "0";
-        userID = "1";
-        name = "";
-        balance = 0;
-        transactions = new ArrayList<Transaction>();
-    }
+    // public Account(){
+    //     // lastTXID = "0";
+    //     accountID = "1";
+    //     name = "";
+    //     balance = 0;
+    //     transactions = new ArrayList<Transaction>();
+    // }
 
-    public Account(String userID, String name, double balance){
-        this.userID = userID;
-        this.name = name;
+    public Account(String accID, String name, double balance){
+        this.accountID = accID;
+        this.accountName = name;
         this.balance = balance;
         transactions = new ArrayList<Transaction>();
     }
-    public Account(String userID, String name, double balance,ArrayList<Transaction> transactions ){
-        this.userID = userID;
-        this.name = name;
+    public Account(String accID, String name, double balance, ArrayList<Transaction> transactions ){
+        this.accountID = accID;
+        this.accountName = name;
         this.balance = balance;
         this.transactions = transactions;
     }
 
-    public void addTransaction(String type, double amount){
-        lastTXID = String.valueOf(Integer.parseInt(lastTXID) + 1);
-        Transaction transaction = new Transaction(lastTXID, type, amount, balance);
+    public void addTransaction(String txID, String type, double amount){
+        
+        Transaction transaction = new Transaction(txID, accountName, type, amount, balance);
         transactions.add(transaction);
 
     }
-    public void setTransactions(ArrayList<Transaction> transactions){
+
+    public String toString(){
+        return accountID + "," +accountName + "," + balance;
+    }
+
+    //setters and getters
+    public void setTransactions(List<Transaction> transactions){
         this.transactions = transactions;
     }
-    public ArrayList<Transaction> geTransactions(){
+    public List<Transaction> geTransactions(){
         return transactions;
     }
 
@@ -51,22 +61,20 @@ public class Account {
         balance = amount;
     }
 
-    public void setUserID(String userID){
-        this.userID = userID;
+    public void setAccountID(String userID){
+        this.accountID = userID;
     }
     
-    public void setName(String name){
-        this.name = name;
+    public void setAccountName(String name){
+        this.accountName = name;
     }
 
-    public String getUserID(){
-        return userID;
+    public String getAccountID(){
+        return accountID;
     }
-    public String getName(){
-        return name;
+    public String getAccountName(){
+        return accountName;
     }
-    public void setLastTXID(String txID){
-        this.lastTXID = txID;
-    }
+    
     
 }

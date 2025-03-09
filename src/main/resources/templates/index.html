@@ -5,15 +5,19 @@
         
         
         <div id="main-container">
-            <h1 th:text = "|Hello ${output.name}|">Hello User</h1>
+            <h1 th:text = "|Hello ${user.username}|">Hello User</h1>
             <header th:replace="~{base :: header}"></header>
-            <h2 th:text="|Your current balance is ${output.amount}|">your current balance is 50000</h2>
+            <div >
+                <h2 th:each="account: ${accounts}" th:text="|${account.accountName} balance is ${account.balance}|">your current balance is 50000</h2>
+            </div>
+            
             <hr>
             <div id="container-actions">
+                <a href="newaccount">New Account</a>
                 <a href="newrecord">New Record</a>
-                <a href="transactions">View Records</a>
+                <a href="transactionlist">View Records</a>
                 <a href="changebalance">Change Balance</a>
-                <a href="signup">Reset Account</a>
+                <!-- <a href="signup">Reset Account</a> -->
             </div>
         </div>
 

@@ -7,12 +7,14 @@
         <div id="main-container">
             <!-- <header th:replace="~{base :: header}"></header> -->
             
-            <form class="form" method="GET" action="/signup">
+            <form class="form" method="post" action="/signup">
                 <p>Please enter your details below</p>
-                <label>Name:</label><br>
-                <input required type="text" name="name">
-                <label>Initial balance:</label><br>
-                <input required type="text" name="amount">
+                <label>Username:</label><br>
+                <input required type="text" name="username">
+                <label>Email:</label><br>
+                <input required type="email" name="email">
+                <label>Password:</label><br>
+                <input required type="text" name="password">
                 <input type="submit" name="signup" value="Sign Up">
             </form>
 
