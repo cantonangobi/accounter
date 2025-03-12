@@ -1,7 +1,7 @@
 FROM ubuntu:latest AS build
 
-RUN apt-get update
-RUN apt-get install openjdk-23-jdk -y
+RUN apt update
+RUN apt install default-jdk -y
 COPY . .
 
 RUN ./gradlew bootJar --no-daemon
