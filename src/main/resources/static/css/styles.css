@@ -1,5 +1,5 @@
 body{
-    background-color: gai;
+    background-color: #EEE;
 }
 h1{
     text-align: center;
@@ -22,7 +22,7 @@ h2{
     display: flex;
     justify-content: space-evenly;
 }
-li{
+#navbar ul li{
     /* position: relative; */
     /* left: 39.5%; */
     list-style-type:none;
@@ -48,7 +48,7 @@ li{
     width: 50%;
     margin:auto;
 }
-#container-actions a{
+.button{
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -58,10 +58,6 @@ li{
     text-decoration: none;
 }
 
-p{
-    padding: 0 1 ;
-    
-}
 .form{
     width: 40%;
     border: #999 solid;
@@ -69,7 +65,7 @@ p{
     border-radius: 20px;
     padding: 10px;
     position: relative;
-    left: 30%;
+    margin: auto;
     font-size: 24px;
     background-color: #EEE;
 }
@@ -109,42 +105,6 @@ p{
     margin: 0;
 }
 
-#calc-display-top{
-    position: relative;
-    width: 100%;
-    font-size: inherit;
-    /* padding: 2px; */
-    margin-top: 5px;
-    background-color: #CCC;
-    text-align: end;
-    /* min-height: 50px; */
-}
-#calc-display-bottom{
-    position: relative;
-    width: 100%;
-    font-size: inherit;
-    /* padding: 2px; */
-    margin-bottom: 10px;
-    background-color: #CCC;
-    text-align: end;
-    /* min-height: 50px; */
-}
-.button-row{
-    position: relative;
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50px, 80px));
-    gap: 10px;
-    margin: 10px 0;
-}
-.button-row button{
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
 
 #container-types{
     display: flex;
@@ -164,4 +124,32 @@ th, td {
 }
 th {
     background-color: #f2f2f2;
+}
+#container-transactions{
+    display: flex;
+    /* justify-content: space-between; */
+}
+#account-select{
+    /* height: 100%;  */
+    width: 250px; 
+    /* position: absolute;  */
+    /* top: 0; */
+    /* left: 0; */
+    /* background-color: #333; */
+    /* padding-top: 20px; */
+}
+#account-select .form{
+    width: 100%;
+}
+#account-select .form .checkbox{
+    width: 20px;
+    height: 20px;
+}
+.checkbox-account{
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    padding-left: 10px;
+    margin: 10 0;
+    width: 100%;
 }

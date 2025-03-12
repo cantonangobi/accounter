@@ -54,6 +54,10 @@ public class UIController {
 
         return "signup";
     }
+    @RequestMapping("/signin")
+    public String signin(){
+        return "signin";
+    }
 
     @RequestMapping("/newaccount")
     public String newaccount(IODataHandler data, Model model){
