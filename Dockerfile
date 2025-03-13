@@ -1,14 +1,14 @@
 FROM ubuntu:latest AS build
 
 RUN apt update
-RUN apt install openjdk-23-jdk -y
+RUN apt install openjdk-21-jdk -y
 COPY . .
 
 RUN java -version
 
 RUN ./gradlew bootJar --no-daemon
 
-FROM openjdk:23-jdk-slim
+FROM openjdk:21-jdk-slim
 
 EXPOSE 8080
 
