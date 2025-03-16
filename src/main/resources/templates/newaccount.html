@@ -1,0 +1,22 @@
+<html>
+    <head th:replace="~{base :: head}"></head>
+    
+    <body>
+        
+        
+        <div id="main-container">
+            <header th:replace="~{base :: header}"></header>
+            
+            <form class="form" method="GET" action="/newaccount">
+                <p>Please enter details of the new account below</p>
+                <label>Account Name:</label><br>
+                <input required type="text" name="accountname">
+                <label>Initial Balance:</label><br>
+                <input required type="number" name="amount">
+                <input type="submit" name="signup" value="Finish">
+            </form>
+
+        </div>
+
+    </body>
+</html>

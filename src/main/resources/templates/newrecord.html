@@ -1,0 +1,34 @@
+<html>
+    <head th:replace="~{base :: head}"></head>
+    
+    <body>
+        
+        
+        <div>
+            <header th:replace="~{base :: header}"></header>
+            
+            <div id="main-container">
+                
+                <form class="form" id="form-newrecord" method="get">
+                    <p>Please Select the account:</p>
+                    <select name="accountname">
+                        <option  th:each="account: ${accounts}" th:text="${account.accountName}" th:value="${account.accountName}">Account1</option>
+                        <!-- <option value="Account1" th:text="${account.accountName}">Account1</option> -->
+                        <!-- <option value="Account1">Account2</option>
+                        <option value="Account1">Account3</option> -->
+                    </select>
+                    <p>Please Enter the amount:</p>
+                    <input type="text" name="amount" required><br>
+                    <div id="container-types">
+                        <label class="radio"><input required class="type" type="radio" name="type" value="expense">expense</label> 
+                        <label class="radio"><input required class="type" type="radio" name="type" value="income">income</label>
+                    </div>
+                    
+                    
+                    <input type="submit" name="submit" value="submit" >
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

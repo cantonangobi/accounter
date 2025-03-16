@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <head th:fragment="head">
+        <title>Accounter</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="icon" href="/images/accounter-logo.svg">
+        
+    <body>
+        
+        
+        <div id="main-container">
+            <header th:fragment="header">
+                <hr>
+                <div th:replace="~{navbar :: navbar}" id="navbar">
+                    <!-- <ul>
+                        <li><a href="/">home</a></li>
+                        <li><a href="#">about</a></li>
+                        <li><a href="#">contact</a></li>
+                        <li><a href="#">hello</a></li>
+                    </ul> -->
+                </div>
+                <hr>
+            </header>
+        </div>
+        <footer th:fragment="footer">
+           
+        </footer>
+    </body>
+</html>

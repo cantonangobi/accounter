@@ -1,0 +1,23 @@
+<html>
+    <head th:replace="~{base :: head}"></head>
+    
+    <body>
+        
+        
+        <div>           
+            <div id="main-container">
+                <header th:replace="~{base :: header}"></header>   
+                <form class="form" method="get">
+                    <p>Please Select the account:</p>
+                    <select name="accountname">
+                        <option  th:each="account: ${accounts}" th:text="${account.accountName}" th:value="${account.accountName}">Account1</option>
+                    </select>
+                    <p>Please Enter the amount:</p>
+                    <input required type="text" name="amount"><br>
+                    <input required type="submit" name="submit" value="submit" >
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

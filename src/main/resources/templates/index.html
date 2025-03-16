@@ -1,0 +1,29 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{base :: head}"></head>
+    
+    <body>
+       
+        
+        <div id="main-container">
+            
+
+            <h1 th:text = "|Hello ${user.username}|">Hello User</h1>
+            <hr>
+            <!-- <header th:replace="~{base :: header}"></header> -->
+
+            <div >
+                <h2 th:each="account: ${accounts}" th:text="|${account.accountName} balance is ${account.balance}|">your current balance is 50000</h2>
+            </div>
+            
+            <hr>
+            <div id="container-actions">
+                <a class="button" href="newaccount">New Account</a>
+                <a class="button" href="newrecord">New Record</a>
+                <a class="button" href="transactionlist">View Records</a>
+                <a class="button" href="changebalance">Change Balance</a>
+                <!-- <a href="signup">Reset Account</a> -->
+            </div>
+        </div>
+        <footer th:replace="~{base :: footer}"></footer>
+    </body>
+</html>
