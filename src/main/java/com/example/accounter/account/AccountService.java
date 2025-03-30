@@ -2,53 +2,52 @@ package com.example.accounter.account;
 
 import java.util.List;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.accounter.user.AppUser;
 import com.example.accounter.user.UserService;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
+// @AllArgsConstructor
 public class AccountService {
     private final AccountRepository accountRepository;
     private final UserService userService;
+    private AppUser user;
 
-    public List<Account> getAccounts(){
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        // AppUser user =  (AppUser) auth.getPrincipal();
-
-        AppUser user = userService.getSessionUser();
-
-        return accountRepository.findAllByUserId(user.getUserId());
+    public AccountService(AccountRepository accountRepository, UserService userService){
+        this.accountRepository = accountRepository;
+        this.userService = userService;
     }
 
-    // public Account geAccount(String name){
-    //     return accountRepository.findAccountByName(name)
-    // }
-    public String addNewAccount(Account account){
-        //get the current logged in user
-        // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        AppUser user = userService.getSessionUser();
+    public List<Account> getAccounts(){
+        this.user = this.userService.getSessionUser();
+        return accountRepository.findAllByUserId(user.getUserId()).get();
+    }
 
+    public String addNewAccount(Account account){
+        this.user = this.userService.getSessionUser();
         account.setUserId(user.getUserId());
         boolean accountExists = accountRepository.findByUserIdAndName(account.getUserId(), account.getName()).isPresent();
-
         if (accountExists){
             System.out.println("Account not added, already exists");
             return "Account not added, already exists";
         }
-
-        //todo: get the actual userId
-        // Long userId = (long) 1;
-
-        
         accountRepository.save(account);
-
-
         return "Account added";
+    }
+
+    public String deleteAccount(String name){
+        this.user = this.userService.getSessionUser();
+        boolean accountExists  = accountRepository.findByUserIdAndName(user.getUserId(), name).isPresent();
+        if (!accountExists){
+            System.out.println("Account does not exist");
+            return "Account does not exist";
+        }
+        Account account = accountRepository.findByUserIdAndName(user.getUserId(), name).get();
+        System.out.println(account.toString());
+        accountRepository.delete(account);
+        // accountRepository.deleteByAccountId(account.getAccountId());
+
+        return "Account has been deleted";
     }
 }

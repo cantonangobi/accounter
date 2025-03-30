@@ -55,4 +55,9 @@ public class AppUser implements UserDetails {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(userRole.name());
         return Collections.singletonList(authority);
     }
+
+    @Override
+    public String toString() {
+        return "userId: " + userId + "username: " + username + " email: " + email;
+    }
 }

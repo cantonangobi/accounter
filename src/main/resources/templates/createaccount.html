@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <head>
-        <title>Accounter</title>
+        <title>New Account - Accounter</title>
         <!-- <link rel="stylesheet" href="/css/styles.css"> -->
         <!-- <link rel="icon" href="/images/accounter-logo.svg"> -->
     </head>
@@ -13,7 +13,7 @@
         
         <div id="main-container">
             
-            <form class="form" method="post" action="/newaccount">
+            <form method="post" action="/newaccount" class="form">
                 <p>Please enter details of the new account below</p>
                 <label>Account Name:</label><br>
                 <input required type="text" name="name"><br>
@@ -22,6 +22,11 @@
                 <input type="submit" name="signup" value="Finish">
             </form>
 
+        </div>
+        <div id="container-actions">
+            <a class="button" href="/">Cancel and go back</a>
+            <a class="button" href="logout">Log Out</a>
+            <!-- <a href="signup">Reset Account</a> -->
         </div>
 
         <script>
@@ -32,13 +37,13 @@
                 const formData = new FormData(form);
                 const data = Object.fromEntries(formData);
 
-                fetch('/api/v1/account', {
+                fetch('/api/v1/account/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type' : 'application/json'
                     },
                     body: JSON.stringify(data)
-                }).then(res => res.json())
+                }).then(res => res.json)
                     .then(data => console.log(data))
                     .catch(error => console.log(error))
             });

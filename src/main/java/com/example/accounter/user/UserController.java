@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @GetMapping(value = "/userdetails")
     public String currentUserName(Authentication auth) {
-
-        AppUser user = (AppUser) auth.getPrincipal();
-        String result = "ID: " + user.getUserId() +" Name: "+user.getUsername();
-    
-        return result;
-
+        AppUser user = (AppUser) auth.getPrincipal();   
+        return user.toString();
     }
+
 }

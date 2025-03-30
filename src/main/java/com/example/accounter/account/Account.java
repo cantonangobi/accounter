@@ -6,11 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Account {
     @Id
     @SequenceGenerator(
@@ -27,16 +29,19 @@ public class Account {
     private String name;
     private Double balance;
 
-    public Account(){
-        
-    }
     public Account(Long userId, String name, Double balance){
         this.userId = userId;
         this.name = name;
         this.balance = balance;
     }
+    
     public Account(String name, Double balance){
         this.name = name;
         this.balance = balance;
+    }
+
+    @Override
+    public String toString(){
+        return "accountId: " + accountId + " name: " + name + " balance: " + balance + " userId: " +userId;
     }
 }

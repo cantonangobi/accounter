@@ -12,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByAccountId(Long accountId);
-    
-    List<Account> findAllByUserId(Long userId);
-
-
+    Optional<List<Account>> findAllByUserId(Long userId);
     Optional<Account> findByName(String name);
     Optional<Account> findByUserIdAndName(Long userId, String name);
 }

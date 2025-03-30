@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Change Balance - Accounter</title>
+
+        <body>
+            <form method="post">
+                <label>Account: </label>
+                <select id="account" name="account" required>
+                    <option value="Cash" selected>Cash</option>
+                    <option value="Mpesa">Mpesa</option>
+                    <option value="Bank">Bank</option>
+                </select>
+                <br>
+                <label>New Balance: </label>
+                <input type="number" id="balance" name="balance" placeholder="balance" required>
+                <br>
+                <button type="submit" id="submit" name="submit">Change Balance</button>
+            </form>
+            <div id="container-actions">
+                <a class="button" href="/">Cancel and go back</a>
+                <a class="button" href="logout">Log Out</a>
+                <!-- <a href="signup">Reset Account</a> -->
+            </div>
+        </body>
+    </head>
+</html>

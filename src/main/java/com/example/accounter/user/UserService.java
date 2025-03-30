@@ -21,8 +21,6 @@ public class UserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email).orElseThrow(() -> 
                             new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
-
-
     }
 
     public String signUpUser(AppUser user){
@@ -47,6 +45,8 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
+
+    // public AppUser
 
     
 }

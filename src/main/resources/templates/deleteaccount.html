@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Change Balance - Accounter</title>
+
+        <body>
+            <form class="form" id="delete-account-form">
+                <label>Account: </label>
+                <!-- <select id="account" name="name" required>
+                    <option value="Cash" selected>Cash</option>
+                    <option value="Mpesa">Mpesa</option>
+                    <option value="Bank">Bank</option>
+                </select> -->
+                <select name="name">
+                    <option th:each="account: ${accounts}" th:text="${account.name}" th:value="${account.name}">Account1</option>
+                </select>
+                <br>
+                <button type="submit" id="delete" name="delete">Delete Account</button>
+            </form>
+            <div id="container-actions">
+                <a class="button" href="/">Cancel and go back</a>
+                <a class="button" href="logout">Log Out</a>
+                <!-- <a href="signup">Reset Account</a> -->
+            </div>
+
+            <script>
+                const form = document.getElementById("delete-account-form");
+                form.addEventListener("submit", event => {
+                    event.preventDefault();
+
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData);
+
+                    fetch("/api/v1/account/delete",
+                        {
+                            method: "DELETE",
+                            headers: {
+                                "Content-Type" : "application/json"
+                            },
+                            body: JSON.stringify(data)
+                        }
+                    ).then(res => res.json).then(data => console.log(data)).catch(error => console.log(error))
+                });
+            </script>
+        </body>
+    </head>
+</html>
