@@ -1,5 +1,7 @@
 package com.example.accounter.user;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,6 +39,13 @@ public class UserService implements UserDetailsService {
         //TODO: Send confirmation token
         
         return "it works";
+    }
+
+    public AppUser getSessionUser(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        AppUser user =  (AppUser) auth.getPrincipal();
+
+        return user;
     }
 
     

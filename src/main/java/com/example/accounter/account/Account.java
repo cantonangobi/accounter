@@ -27,8 +27,15 @@ public class Account {
     private String name;
     private Double balance;
 
+    public Account(){
+        
+    }
     public Account(Long userId, String name, Double balance){
         this.userId = userId;
+        this.name = name;
+        this.balance = balance;
+    }
+    public Account(String name, Double balance){
         this.name = name;
         this.balance = balance;
     }
