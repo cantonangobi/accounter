@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <head>
+        <title>Accounter</title>
+        <!-- <link rel="stylesheet" href="/css/styles.css"> -->
+        <!-- <link rel="icon" href="/images/accounter-logo.svg"> -->
+        
+    <body>
+        
+        
+        <div id="main-container">
+            <form class="form" method="post" action="/">
+                <p>Please enter your details below</p>
+                <label>Username:</label><br>
+                <input required type="text" name="username"><br>
+                <label>Email:</label><br>
+                <input required type="email" name="email"><br>
+                <label>Password:</label><br>
+                <input required type="text" name="password"><br>
+                <input type="submit" name="signup" value="Sign Up">
+            </form>
+        </div>
+
+        <script>
+            const form = document.querySelector('.form');
+            form.addEventListener('submit',event => {
+                event.preventDefault();
+
+                const formData = new FormData(form);
+                console.log(formData.get('username'));
+
+                const data = Object.fromEntries(formData);
+                console.log(data);
+
+                fetch('/api/v1/registration', {
+                    method: 'POST',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }).then(res => res.json())
+                    .then(data => 
+                        console.log(data)
+                    )
+                    .catch(error => console.log(error))
+            });
+        </script>
+           
+    </body>
+</html>
