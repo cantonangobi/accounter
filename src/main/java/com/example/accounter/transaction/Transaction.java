@@ -23,21 +23,23 @@ public class Transaction {
         generator = "transaction_sequence"
     )
     private Long transactionId;
-    private Long accountId;
     private Long userId;
+    private Long accountId;
+    private String accountName;
     private String type;
     private Double amount;
     private Double balance;
 
-    public Transaction(String type, Double amount, Double balance){
-        this.type = type;
-        this.amount = amount;
-        this.balance = balance;
-    }
+    // public Transaction(String type, Double amount, Double balance){
+    //     this.type = type;
+    //     this.amount = amount;
+    //     this.balance = balance;
+    // }
     
-    public Transaction(Long accountId, Long userId, String type, Double amount, Double balance){
+    public Transaction(Long userId, Long accountId, String accountName, String type, Double amount, Double balance){
+        this.userId = userId;
         this.accountId = accountId;
-        this.userId = userId;        
+        this.accountName = accountName;                
         this.type = type;
         this.amount = amount;
         this.balance = balance;

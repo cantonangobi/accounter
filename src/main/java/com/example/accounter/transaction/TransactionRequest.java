@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TransactionRequest {
+    private Long transactionId;
     private String accountName;
     private String type;
     private Double amount;

@@ -1,7 +1,11 @@
 package com.example.accounter.transaction;
 
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.accounter.account.Account;
@@ -11,21 +15,62 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api/v1/transaction")
 public class TransactionController {
     private final TransactionService transactionService;
     private final AccountService accountService;
 
-    @PostMapping("/api/v1/transaction/add")
-    public String addTransaction(@RequestBody TransactionRequest request){
+    @PostMapping("/create")
+    public String createTransaction(@RequestBody TransactionRequest request){
 
         Account account = accountService.getAccount(request.getAccountName());
-        Transaction transaction = new Transaction(account.getAccountId(), account.getUserId(), request.getType(), request.getAmount(), request.getBalance());
+        Transaction transaction = new Transaction(account.getUserId(), 
+                                                    account.getAccountId(), 
+                                                    account.getName(), 
+                                                    request.getType(), 
+                                                    request.getAmount(), 
+                                                    request.getBalance());
 
-        return transactionService.addTransaction(transaction, account);
+        return transactionService.createTransaction(transaction, account);
     }
 
-    @PostMapping(path = "/api/v1/transaction/changebalance", consumes = "application/json")
+    @PostMapping(path = "/changebalance", consumes = "application/json")
     public String changeBalance(@RequestBody TransactionRequest request){
         return transactionService.changeBalance(request.getAccountName(), request.getAmount());
     }
+
+    @RequestMapping(path = "/getusertransactions")
+    public List<Transaction> getUserTransactions(){
+        return transactionService.getUserTransactions();
+    }
+
+    @RequestMapping(path = "/getaccounttransactions")
+    public List<Transaction> getAccountTransactions(@RequestBody TransactionRequest request){
+        return transactionService.getAccountTransactions(request.getAccountName());
+    }
+
+    @DeleteMapping(path = "/delete", consumes = "application/json")
+    public String deleteTransaction(@RequestBody TransactionRequest request){
+        return transactionService.deleteById(request.getTransactionId());
+    }
+
+    @DeleteMapping(path = "/deleteaccounttransactions", consumes = "application/json")
+    public String deleteAccountTransactions(@RequestBody TransactionRequest request){
+        return transactionService.deleteAccountRecords(request.getAccountName());
+    }
+
+    @PostMapping(path = "/update", consumes = "application/json")
+    public String updateTransaction(@RequestBody TransactionRequest request){
+        Account account = accountService.getAccount(request.getAccountName());
+        // Transaction transaction = transactionService.getById(request.getTransactionId());
+        Transaction transaction = new Transaction(account.getUserId(), 
+                                                    account.getAccountId(), 
+                                                    account.getName(), 
+                                                    request.getType(), 
+                                                    request.getAmount(), 
+                                                    request.getBalance());
+
+        return transactionService.updateTransaction(request.getTransactionId(), transaction);
+    }   
+
 }

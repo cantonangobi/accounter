@@ -36,7 +36,7 @@ public class AccountService {
     }
 
 
-    public String editAccount(Account account){
+    public String updateAccount(Account account){
         boolean accountExists = accountRepository.existsById(account.getAccountId());
         if (!accountExists){
             System.out.println("Account doesn't exist");
@@ -47,7 +47,7 @@ public class AccountService {
         return "Account Changes saved";
     }
 
-    public String addNewAccount(Account account){
+    public String createAccount(Account account){
         this.user = this.userService.getSessionUser();
         account.setUserId(user.getUserId());
         boolean accountExists = accountRepository.findByUserIdAndName(account.getUserId(), account.getName()).isPresent();
@@ -72,5 +72,9 @@ public class AccountService {
         // accountRepository.deleteByAccountId(account.getAccountId());
 
         return "Account has been deleted";
+    }
+
+    public AppUser getUser(){
+        return userService.getSessionUser();
     }
 }

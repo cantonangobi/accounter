@@ -1,9 +1,12 @@
 package com.example.accounter.transaction;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.accounter.account.Account;
 import com.example.accounter.account.AccountService;
+import com.example.accounter.user.AppUser;
 
 import lombok.AllArgsConstructor;
 
@@ -14,7 +17,7 @@ public class TransactionService {
     private final AccountService accountService;
 
 
-    public String addTransaction(Transaction transaction, Account account){
+    public String createTransaction(Transaction transaction, Account account){
         // Account account = accountService.g
         Double balance = account.getBalance();
         if (transaction.getType().equals("Expense")){
@@ -25,7 +28,7 @@ public class TransactionService {
         }
 
         account.setBalance(balance);
-        accountService.editAccount(account);
+        accountService.updateAccount(account);
         transaction.setBalance(balance);
         transactionRepository.save(transaction);
 
@@ -51,10 +54,75 @@ public class TransactionService {
             transactionType = "Expense";
         }
         
-        Transaction transaction = new Transaction(account.getAccountId(), account.getUserId(), transactionType, transactionAmount, balance);
+        Transaction transaction = new Transaction(account.getUserId(), 
+                                                    account.getAccountId(), 
+                                                    account.getName(), 
+                                                    transactionType, 
+                                                    transactionAmount, 
+                                                    balance);
         
-        return this.addTransaction(transaction, account);
+        return this.createTransaction(transaction, account);
         
         
     }
+
+    public List<Transaction> getUserTransactions(){
+        AppUser user = accountService.getUser();
+        return transactionRepository.findAllByUserId(user.getUserId()).get();
+    }
+
+    public Transaction getById(Long transactionId){
+        boolean transactionExists = transactionRepository.existsById(transactionId);
+        if(!transactionExists){
+            System.out.println("Transaction doesn't exist");
+            return null;
+        }
+
+        return transactionRepository.getReferenceById(transactionId);
+    }
+
+    public List<Transaction> getAccountTransactions(String accountName){
+        Account account = accountService.getAccount(accountName);
+        return transactionRepository.findAllByAccountId(account.getAccountId()).get();
+    }
+
+    public String deleteById(Long transactionId){
+        boolean transactionExists = transactionRepository.existsById(transactionId);
+        if (!transactionExists){
+            System.out.println("Transaction does not exist");
+            return "Transaction does not exist";
+        }
+        transactionRepository.deleteById(transactionId);
+        return "Transaction Deleted";
+    }
+
+    public String deleteAccountRecords(String accountName){
+        Account account = accountService.getAccount(accountName);
+        if (account == null){
+            System.out.println("Account doesn't exist");
+            return "Account doesn't exist";
+        }
+        transactionRepository.deleteAllByAccountId(account.getAccountId());
+
+        return "Transactions deleted for the account " + accountName;
+
+    }
+
+    public String updateTransaction(Long transactionId, Transaction newTransaction){
+        boolean transactionExists = transactionRepository.existsById(transactionId);
+        if (!transactionExists){
+            System.out.println("Transaction does not exist");
+            return "Transaction does not exist";
+        }
+
+        Transaction currentTransaction = transactionRepository.getReferenceById(transactionId);
+        currentTransaction.setAmount(newTransaction.getAmount());
+        currentTransaction.setBalance(newTransaction.getBalance());
+        currentTransaction.setType(newTransaction.getType());
+
+
+        transactionRepository.save(currentTransaction);
+        return "Transaction updated";
+    }
+
 }

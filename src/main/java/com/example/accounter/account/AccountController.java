@@ -8,26 +8,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.accounter.transaction.TransactionService;
+
 import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-// @RequestMapping(path = "/api/v1/account")
+@RequestMapping(path = "/api/v1/account")
 public class AccountController {
     private AccountService accountService;
+    private TransactionService transactionService;
 
-    @PostMapping(path = "/api/v1/account/create", consumes = "application/json")
-    public String addNewAccount(@RequestBody AccountRequest request){
+    @PostMapping(path = "/create", consumes = "application/json")
+    public String createAccount(@RequestBody AccountRequest request){
         Account newAccount = new Account(request.getName(), request.getBalance());
-        return accountService.addNewAccount(newAccount);
+        return accountService.createAccount(newAccount);
     }
 
-    @DeleteMapping(path = "/api/v1/account/delete", consumes = "application/json")
+    @PostMapping(path = "/update", consumes = "application/json")
+    public String updateAccount(@RequestBody AccountRequest request){
+        Account newAccount = new Account(request.getName(), request.getBalance());
+        return accountService.updateAccount(newAccount);
+    }
+
+    @DeleteMapping(path = "/delete", consumes = "application/json")
     public String deleteAccount(@RequestBody AccountRequest request){
-        return accountService.deleteAccount(request.getName());
+        String response = "";
+        response += transactionService.deleteAccountRecords(request.getName()) + "\n";
+        response += accountService.deleteAccount(request.getName());
+        return response;
     }
 
-    @RequestMapping("/api/v1/account/accounts")
+    @RequestMapping("/getaccounts")
+    public List<Account> getAccounts(){   
+        return accountService.getAccounts();
+    }
+
+    @RequestMapping("/displayaccounts")
     public String accounts(){   
         List<Account> accountList = accountService.getAccounts();
         String result = "";
