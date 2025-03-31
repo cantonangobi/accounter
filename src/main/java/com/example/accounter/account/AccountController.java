@@ -2,15 +2,11 @@ package com.example.accounter.account;
 
 import java.util.List;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.accounter.user.AppUser;
 
 import lombok.AllArgsConstructor;
 
@@ -31,7 +27,7 @@ public class AccountController {
         return accountService.deleteAccount(request.getName());
     }
 
-    @RequestMapping("/accounts")
+    @RequestMapping("/api/v1/account/accounts")
     public String accounts(){   
         List<Account> accountList = accountService.getAccounts();
         String result = "";

@@ -24,6 +24,29 @@ public class AccountService {
         return accountRepository.findAllByUserId(user.getUserId()).get();
     }
 
+    public Account getAccount(String name){
+        this.user = this.userService.getSessionUser();
+        boolean accountExists = accountRepository.findByUserIdAndName(user.getUserId(), name).isPresent();
+        if (!accountExists){
+            System.out.println("Account not found");
+            return null;
+        }
+        Account account = accountRepository.findByUserIdAndName(user.getUserId(), name).get();
+        return account;
+    }
+
+
+    public String editAccount(Account account){
+        boolean accountExists = accountRepository.existsById(account.getAccountId());
+        if (!accountExists){
+            System.out.println("Account doesn't exist");
+            return "Account doesn't exist";
+        }
+
+        accountRepository.save(account);
+        return "Account Changes saved";
+    }
+
     public String addNewAccount(Account account){
         this.user = this.userService.getSessionUser();
         account.setUserId(user.getUserId());
