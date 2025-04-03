@@ -42,6 +42,14 @@ public class AppController {
         List<Account> accounts = accountService.getAccounts();
         model.addAttribute("accounts", accounts);
         return "deleteaccount";
+        
+    }
+
+    @RequestMapping("/addrecord")
+    public String addRecord(Model model){
+        List<Account> accounts = accountService.getAccounts();
+        model.addAttribute("accounts", accounts);
+        return "addrecord";
     }
 
     

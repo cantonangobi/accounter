@@ -56,7 +56,7 @@ public class TransactionController {
 
     @DeleteMapping(path = "/deleteaccounttransactions", consumes = "application/json")
     public String deleteAccountTransactions(@RequestBody TransactionRequest request){
-        return transactionService.deleteAccountRecords(request.getAccountName());
+        return transactionService.deleteAccountTransactions(request.getAccountName());
     }
 
     @PostMapping(path = "/update", consumes = "application/json")

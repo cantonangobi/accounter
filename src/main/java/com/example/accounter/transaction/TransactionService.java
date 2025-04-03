@@ -96,16 +96,16 @@ public class TransactionService {
         return "Transaction Deleted";
     }
 
-    public String deleteAccountRecords(String accountName){
+    public String deleteAccountTransactions(String accountName){
         Account account = accountService.getAccount(accountName);
         if (account == null){
             System.out.println("Account doesn't exist");
             return "Account doesn't exist";
         }
+        System.out.println(account.toString());
         transactionRepository.deleteAllByAccountId(account.getAccountId());
 
         return "Transactions deleted for the account " + accountName;
-
     }
 
     public String updateTransaction(Long transactionId, Transaction newTransaction){
@@ -119,7 +119,6 @@ public class TransactionService {
         currentTransaction.setAmount(newTransaction.getAmount());
         currentTransaction.setBalance(newTransaction.getBalance());
         currentTransaction.setType(newTransaction.getType());
-
 
         transactionRepository.save(currentTransaction);
         return "Transaction updated";

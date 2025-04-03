@@ -34,7 +34,7 @@ public class AccountController {
     @DeleteMapping(path = "/delete", consumes = "application/json")
     public String deleteAccount(@RequestBody AccountRequest request){
         String response = "";
-        response += transactionService.deleteAccountRecords(request.getName()) + "\n";
+        response += transactionService.deleteAccountTransactions(request.getName()) + "\n";
         response += accountService.deleteAccount(request.getName());
         return response;
     }
