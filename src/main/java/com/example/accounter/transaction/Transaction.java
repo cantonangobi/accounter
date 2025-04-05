@@ -28,6 +28,7 @@ public class Transaction {
     private Long userId;
     private Long accountId;
     private String accountName;
+    private String category;
     private String type;
     private Double amount;
     private Double balance;
@@ -38,12 +39,19 @@ public class Transaction {
     //     this.balance = balance;
     // }
     
-    public Transaction(Long userId, Long accountId, String accountName, String type, Double amount, Double balance){
+    public Transaction(Long userId, Long accountId, String accountName, String category, String type, Double amount, Double balance){
         this.userId = userId;
         this.accountId = accountId;
-        this.accountName = accountName;                
+        this.accountName = accountName;    
+        this.category = category;            
         this.type = type;
         this.amount = amount;
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        String result = "AccountName: " + accountName + ", Category: " + category + ", Type: " + type + ", Amount: " + amount + ", Balance" + balance;
+        return result;
     }
 }

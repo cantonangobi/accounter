@@ -35,7 +35,7 @@ public class TransactionService {
         return "Transaction recorded";
     }
 
-    public String changeBalance(String name, Double balance){
+    public String changeBalance(String name, Double amount){
         // this.user = this.userService.getSessionUser();
         Account account = accountService.getAccount(name);
 
@@ -44,10 +44,10 @@ public class TransactionService {
             return "Account doesn't exist";
         }
 
-        Double transactionAmount = Math.abs(balance - account.getBalance());
+        Double transactionAmount = Math.abs(amount - account.getBalance());
         String transactionType;
     
-        if (balance > account.getBalance()){
+        if (amount > account.getBalance()){
             transactionType = "Income";
         }
         else{
@@ -56,10 +56,11 @@ public class TransactionService {
         
         Transaction transaction = new Transaction(account.getUserId(), 
                                                     account.getAccountId(), 
-                                                    account.getName(), 
+                                                    account.getName(),
+                                                    "Adjustment", 
                                                     transactionType, 
                                                     transactionAmount, 
-                                                    balance);
+                                                    amount);
         
         return this.createTransaction(transaction, account);
         

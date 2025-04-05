@@ -12,6 +12,7 @@ import lombok.Setter;
 public class TransactionRequest {
     private Long transactionId;
     private String accountName;
+    private String category;
     private String type;
     private Double amount;
     private Double balance;

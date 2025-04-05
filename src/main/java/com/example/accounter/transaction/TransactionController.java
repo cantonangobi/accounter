@@ -26,7 +26,8 @@ public class TransactionController {
         Account account = accountService.getAccount(request.getAccountName());
         Transaction transaction = new Transaction(account.getUserId(), 
                                                     account.getAccountId(), 
-                                                    account.getName(), 
+                                                    account.getName(),
+                                                    request.getCategory(), 
                                                     request.getType(), 
                                                     request.getAmount(), 
                                                     request.getBalance());
@@ -65,7 +66,8 @@ public class TransactionController {
         // Transaction transaction = transactionService.getById(request.getTransactionId());
         Transaction transaction = new Transaction(account.getUserId(), 
                                                     account.getAccountId(), 
-                                                    account.getName(), 
+                                                    account.getName(),
+                                                    request.getCategory(), 
                                                     request.getType(), 
                                                     request.getAmount(), 
                                                     request.getBalance());
