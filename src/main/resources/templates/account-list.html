@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Accounter - Accounts</title>
         <link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/account.css">
 		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +19,8 @@
 			</div>
 			<div id="nav-links" class="box-horizontal">
 				<a class="nav-link" href="/">Dashboard</a>
-				<a id="nav-link-active" class="nav-link" href="accountlist">Accounts</a>
-				<a class="nav-link" href="transactionlist">Transactions</a>
+				<a id="nav-link-active" class="nav-link" href="account-list">Accounts</a>
+				<a class="nav-link" href="transaction-list">Transactions</a>
 			</div>
 			<a id="logout" href="logout">Logout</a>
 		</div>
@@ -31,9 +32,9 @@
 			<a class="btn-primary" href="account-create">Add Account</a>
 		</div>
 		<div class="box-vertical box-primary cols-3">
-			<a th:each="account: ${accounts}" th:id="|btn-${account.name}|" th:href="|/accountdetails/${account.name}|" class="list-item">
+			<a th:each="account: ${accounts}" th:id="|btn-${account.name}|" th:href="|/account-details/${account.name}|" class="list-item">
 				<span th:text="${account.name}">Account Name</span>
-				<span th:text="|KES. ${account.balance}|">balance</span>
+				<span th:text="|KES ${account.balance}|">balance</span>
 			</a>
 			<!-- <div class="list-item">
 				<span>Account Name</span>

@@ -64,7 +64,7 @@ public class AppController {
         return "addrecord";
     }
 
-    @RequestMapping("/accountlist")
+    @RequestMapping("/account-list")
     public String accountList(Model model){
         List<Account> accounts = accountService.getAccounts();
 
@@ -73,7 +73,7 @@ public class AppController {
         return "account-list";
     }
 
-    @RequestMapping("/accountdetails/{name}")
+    @RequestMapping("/account-details/{name}")
     public String accountDetails(@PathVariable("name") String accountName, Model model){
         System.out.println(accountName);
         Account account = accountService.getAccount(accountName);
@@ -92,7 +92,7 @@ public class AppController {
     //     return "resource-not-found";
     // }
 
-    @RequestMapping("/transactionlist")
+    @RequestMapping("/transaction-list")
     public String TransactionList(Model model){
         List<Account> accounts = accountService.getAccounts();
         List<Transaction> transactions = transactionService.getUserTransactions();
@@ -102,7 +102,15 @@ public class AppController {
         
         System.out.println(model.getAttribute("transactions"));
 
-        return "transactionlist";
+        return "transaction-list";
+    }
+
+    @RequestMapping("/transaction-create")
+    public String TransactionCreate(Model model){
+        List<Account> accounts = accountService.getAccounts();
+        model.addAttribute("accounts", accounts);
+
+        return "transaction-create";
     }
 
     

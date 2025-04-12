@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accounter - Create Account</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/account.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Round&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+        
+        <div class="box-secondary box-fullscreen">
+            <a class="btn-primary btn-back" href="transaction-list">Back</a>
+            <div id="box-create-form">
+                <h1>Add Transaction</h1>
+                <form id="form-create-transaction" class="box-vertical">
+                    <label>Type</label><br>
+                    <select name="type">
+                        <option value="Expense">Expense</option>
+                        <option value="Income">Income</option>
+                    </select><br>
+                    <label>Category</label><br>
+                    <select name="category">
+                        <option value="Food">Food</option>
+                        <option value="Transport">Transport</option>
+                        <option value="Home">Home</option>
+                        <option value="Enjoyment">Enjoyment</option>
+                        <option value="Other">Other</option>
+                        <option value="Income">Income</option>
+                    </select><br>
+                    <label>Account Name</label><br>
+                    <select  name="accountName">
+                        <option th:each="account: ${accounts}" th:text="${account.name}" >Account 1</option>
+                        <!-- <option>Account 2</option>
+                        <option>Account 3</option> -->
+                    </select><br>
+                    <label>Amount</label><br>
+                    <input type="number" placeholder="Amount" name="amount" required><br>
+                    <button class="btn-primary btn-form">Save</button><br>
+                </form>
+            </div>
+            
+        </div>
+        
+        <script src="js/create_transaction.js"></script>
+    </body>
+</html>

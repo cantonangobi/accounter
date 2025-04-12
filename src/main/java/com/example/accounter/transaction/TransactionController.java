@@ -30,7 +30,7 @@ public class TransactionController {
                                                     request.getCategory(), 
                                                     request.getType(), 
                                                     request.getAmount(), 
-                                                    request.getBalance());
+                                                    account.getBalance());
 
         return transactionService.createTransaction(transaction, account);
     }

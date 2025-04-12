@@ -19,6 +19,9 @@ public class TransactionService {
 
     public String createTransaction(Transaction transaction, Account account){
         // Account account = accountService.g
+        if (account == null){
+            return "Account doesn't exist";
+        }
         Double balance = account.getBalance();
         if (transaction.getType().equals("Expense")){
             balance = balance - transaction.getAmount();        
@@ -32,7 +35,7 @@ public class TransactionService {
         transaction.setBalance(balance);
         transactionRepository.save(transaction);
 
-        return "Transaction recorded";
+        return "Success";
     }
 
     public String changeBalance(String name, Double amount){
