@@ -2,20 +2,15 @@ package com.example.accounter;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.server.ResponseStatusException;
-
 import com.example.accounter.account.Account;
 import com.example.accounter.account.AccountService;
 import com.example.accounter.transaction.Transaction;
 import com.example.accounter.transaction.TransactionService;
 import com.example.accounter.user.UserService;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
-
 import lombok.AllArgsConstructor;
 
 @Controller

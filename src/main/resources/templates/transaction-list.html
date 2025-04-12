@@ -54,12 +54,12 @@
 			</form>
 		</div>
 		<div  class="box-vertical box-primary cols-3">
+			<div th:each="transaction : ${transactions}" class="list-item">
+				<span th:text="${transaction.category}" >Transaction Category</span>
+				<span th:text="${transaction.accountName}" >Account Name</span>
+				<span th:text="|KES ${transaction.amount}|" >Amount</span>
+			</div>
 		<!--	<a href="#" class="list-item">
-				<span>Transaction Category</span>
-				<span >Account Name</span>
-				<span>Amount</span>
-			</a>
-			<a href="#" class="list-item">
 				<span>Transaction Category</span>
 				<span>Tx Type</span>
 				<span>Amount</span>
@@ -71,14 +71,14 @@
 				</div>
 				<span>Amount</span>
 			</div> -->
-			<div th:each="transaction: ${transactions}" class="list-item">
+			<!-- <div th:each="transaction: ${transactions}" class="list-item">
 				<div  class="box-vertical">
-					<span>Transaction Category</span>
+					<span th:text="${transaction.category}" >Transaction Category</span>
 					<span th:text="${transaction.accountName}">Account Name</span>
 				</div>
 				<span th:text="${transaction.type}">Tx Type</span>
 				<span th:text="|KES ${transaction.amount}|">Amount</span>
-			</div>
+			</div> -->
 		</div>
 		
 	</div>

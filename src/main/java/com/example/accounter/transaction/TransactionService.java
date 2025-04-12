@@ -23,13 +23,16 @@ public class TransactionService {
             return "Account doesn't exist";
         }
         Double balance = account.getBalance();
+        Double amount = transaction.getAmount();
         if (transaction.getType().equals("Expense")){
-            balance = balance - transaction.getAmount();        
+            amount = 0 - amount;
+            transaction.setAmount(amount);
+            // balance = balance - transaction.getAmount();        
         }
-        else if (transaction.getType().equals( "Income")){
-            balance = balance + transaction.getAmount();
-        }
-
+        // else if (transaction.getType().equals( "Income")){
+        //     balance = balance + transaction.getAmount();
+        // }
+        balance = balance + amount;
         account.setBalance(balance);
         accountService.updateAccount(account);
         transaction.setBalance(balance);

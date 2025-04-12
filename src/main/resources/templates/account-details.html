@@ -37,21 +37,26 @@
 					<p th:text="|Balance: KES ${account.balance}|" >Account Balance: 000000</p>
 				</div>
 				<div class="box-primary box-vertical flex-right">
-					<a href="account-create" class="btn-primary ">Edit</a>
-					<p><button onclick="confirm('Are you Sure?')" class="btn-danger">Delete</button></p>
+					<a href="account-create" class="btn-primary ">Edit Account</a>
+					<p><button onclick="confirm('Are you Sure?')" class="btn-danger">Delete Account</button></p>
 				</div>
 			</div>
 		</div>
 		
 		<div id="box-account-transactions" class="box-primary box-list">
-			<div th:each="transaction: ${transactions}" class="list-item">
+			<div th:each="transaction : ${transactions}" class="list-item">
+				<span th:text="${transaction.category}" >Transaction Category</span>
+				<span th:text="${transaction.accountName}" >Account Name</span>
+				<span th:text="|KES ${transaction.amount}|" >Amount</span>
+			</div>
+			<!-- <div th:each="transaction: ${transactions}" class="list-item">
 				<div  class="box-vertical">
 					<span>Transaction Category</span>
 					<span th:text="${transaction.accountName}">Account Name</span>
 				</div>
 				<span th:text="${transaction.type}">Tx Type</span>
 				<span th:text="|KES ${transaction.amount}|">Amount</span>
-			</div>
+			</div> -->
 			<!-- <a href="#" class="list-item">
 				<span>Account Name</span>
 				<span>balance</span>

@@ -1,39 +1,42 @@
-const form = document.getElementById('form-create-account');
-form.addEventListener('submit', on_click_submit);
+const api_url = "/api/v1/account/create";
+const success_url = "/account-list";
+const form_id = "form-create-account"
 
-function on_click_submit(){
-    event.preventDefault();
-    var data = parse_form(form);
-    send_to_backend('/api/v1/account/create', data);
-}
+initializeForm(form_id);
 
-function parse_form(form){
-    const formData = new FormData(form);
-    var data = Object.fromEntries(formData);
-    var json_data = JSON.stringify(data);
-    console.log(json_data);
-    return json_data;
-}
+// const form = document.getElementById(form_id);
+// form.addEventListener("submit", submitForm);
 
-function send_to_backend(url, data){
-    var response;
-    fetch(url, {
-        method: 'POST',
-        headers:{ 'Content-Type': 'application/json' },
-        body: data
-    })
-    .then(res => res.text())
-    .then(message =>{ 
-        console.log(message); 
-        if (message == "Success"){
-            alert("Account was added!");
-            window.location.href = "/accountlist";
-        }
-        else{
-            alert(message);
-        }
-        response = message;
-    })
-    .catch(error => console.log(error));
-    return response;
-}
+// function submitForm(){
+//     event.preventDefault();
+//     let data = parse_form(form);
+//     send_to_backend(api_url, data, success_url);
+// }
+
+// function parse_form(form){
+//     const formData = new FormData(form);
+//     let data = Object.fromEntries(formData);
+//     let json_data = JSON.stringify(data);
+//     console.log(json_data);
+//     return json_data;
+// }
+
+// function send_to_backend(api_url, data, success_url){
+//     fetch(api_url, {
+//         method: 'POST',
+//         headers:{ 'Content-Type': 'application/json' },
+//         body: data
+//     })
+//     .then(response => response.text())
+//     .then(message =>{ 
+//         console.log(message); 
+//         if (message == "Success"){
+//             alert(message);
+//             window.location.href = success_url;
+//         }
+//         else{
+//             alert(message);
+//         }
+//     })
+//     .catch(error => console.log(error));
+// }
