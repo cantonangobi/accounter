@@ -19,6 +19,12 @@ public class AccountController {
     private AccountService accountService;
     private TransactionService transactionService;
 
+    
+    @RequestMapping("/getaccounts")
+    public List<Account> getAccounts(){   
+        return accountService.getAccounts();
+    }
+    
     @PostMapping(path = "/create", consumes = "application/json")
     public String createAccount(@RequestBody AccountRequest request){
         Account newAccount = new Account(request.getName(), request.getBalance());
@@ -39,10 +45,7 @@ public class AccountController {
         return response;
     }
 
-    @RequestMapping("/getaccounts")
-    public List<Account> getAccounts(){   
-        return accountService.getAccounts();
-    }
+    
 
     @RequestMapping("/displayaccounts")
     public String accounts(){   

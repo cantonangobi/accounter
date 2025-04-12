@@ -20,7 +20,7 @@
                 <form class="form" id="form-newrecord" method="post">
                     <p>Please Select the account:</p>
                     <select name="accountname">
-                        <option  th:each="account: ${accounts}" th:text="${account.accountName}" th:value="${account.accountName}">Account1</option>
+                        <option  th:each="account: ${accounts}" th:text="${account.name}" th:value="${account.name}">Account1</option>
                         <!-- <option value="Account1" th:text="${account.accountName}">Account1</option> -->
                         <!-- <option value="Account1">Account2</option>
                         <option value="Account1">Account3</option> -->

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accounter - Accounts</title>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Round&display=swap" rel="stylesheet">
+    </head>
+    <body>
+		<header>
+			<div id="navbar">
+				<div id="logo">
+					<a href="/">Accounter</a>
+				</div>
+				<div id="nav-links" class="box-horizontal">
+					<a class="nav-link" href="/">Dashboard</a>
+					<a class="nav-link" href="accountlist">Accounts</a>
+					<a id="nav-link-active" class="nav-link" href="transactionlist">Transactions</a>
+				</div>
+				<a id="logout" href="logout">Logout</a>
+			</div>
+		</header>
+	<br><br>
+	<div class="box-horizontal">
+		<div class="box-vertical box-primary sidebar">
+			<h1>Transactions</h1>
+			<a class="btn-primary" href="transactioncreate.html">
+				Add Transaction
+			</a>
+			<hr>
+			<form class="box-vertical">
+				<h2>Filters</h2>
+				<fieldset >
+					<legend>Accounts</legend>
+					<div th:each="account: ${accounts}">
+						<input  th:value="${account.name}" type="checkbox"><label th:text="${account.name}">Account 1</label><br>
+					</div>
+					
+					<!-- <input type="checkbox"><label>Account 2</label><br>
+					<input type="checkbox"><label>Account 3</label><br> -->
+				</fieldset>
+				<fieldset>
+					<legend>Categories</legend>
+					<input type="checkbox"><label>Category 1</label><br>
+					<input type="checkbox"><label>Category 2</label><br>
+					<input type="checkbox"><label>Category 3</label><br>
+				</fieldset>
+				<button class="btn-primary btn-form">Filter</button>
+			</form>
+		</div>
+		<div  class="box-vertical box-primary cols-3">
+		<!--	<a href="#" class="list-item">
+				<span>Transaction Category</span>
+				<span >Account Name</span>
+				<span>Amount</span>
+			</a>
+			<a href="#" class="list-item">
+				<span>Transaction Category</span>
+				<span>Tx Type</span>
+				<span>Amount</span>
+			</a>
+			<div class="list-item">
+				<div class="box-vertical">
+					<span>Transaction Category</span>
+					<span>Account Name</span>
+				</div>
+				<span>Amount</span>
+			</div> -->
+			<div th:each="transaction: ${transactions}" class="list-item">
+				<div  class="box-vertical">
+					<span>Transaction Category</span>
+					<span th:text="${transaction.accountName}">Account Name</span>
+				</div>
+				<span th:text="${transaction.type}">Tx Type</span>
+				<span th:text="|KES. ${transaction.amount}|">Amount</span>
+			</div>
+		</div>
+		
+	</div>
+    </body>
+</html>

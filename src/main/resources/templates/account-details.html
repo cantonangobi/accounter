@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accounter - Accounts</title>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="/css/styles.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Round&display=swap" rel="stylesheet">
+    </head>
+    <body>
+	<header>
+		<div id="navbar">
+			<div id="logo">
+				<a href="/">Accounter</a>
+			</div>
+			<div id="box-nav-links" class="box-horizontal">
+				<a class="nav-link" href="/">Dashboard</a>
+				<a class="nav-link" href="/accountlist">Accounts</a>
+				<a class="nav-link" href="/transactionlist">Transactions</a>
+			</div>
+			<a id="logout" href="/login">Logout</a>
+		</div>
+	</header>
+	<br><br>
+	<div id="box-root" class="box-vertical">
+		<div id="account-details" class="box-primary box-horizontal">
+			<div class="box-primary box-vertical flex-left">
+				<p th:text="|Account Name: ${account.name}|" >Account Name: Account 1</p>
+				<p th:text="|Balance: ${account.balance}|" >Account Balance: 000000</p>
+			</div>
+			<div class="box-primary box-vertical flex-right">
+				<a href="account-create" class="btn-primary ">Edit</a>
+				<p><button onclick="confirm('Are you Sure?')" class="btn-danger">Delete</button></p>
+			</div>
+			
+		</div>
+		<div id="box-account-transactions" class="box-primary box-list">
+			<div th:each="transaction: ${transactions}" class="list-item">
+				<div  class="box-vertical">
+					<span>Transaction Category</span>
+					<span th:text="${transaction.accountName}">Account Name</span>
+				</div>
+				<span th:text="${transaction.type}">Tx Type</span>
+				<span th:text="|KES. ${transaction.amount}|">Amount</span>
+			</div>
+			<!-- <a href="#" class="list-item">
+				<span>Account Name</span>
+				<span>balance</span>
+			</a>
+			<div class="list-item">
+				<span>Account Name</span>
+				<span>balance</span>
+			</div>
+			<div class="list-item">
+				<span>Account Name</span>
+				<span>balance</span>
+			</div>
+			<div class="list-item">
+				<span>Account Name</span>
+				<span>balance</span>
+			</div> -->
+		</div>
+		
+	</div>
+    </body>
+</html>

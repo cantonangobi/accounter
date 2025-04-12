@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Accounter</title>
+        <!-- <link rel="stylesheet" href="/css/styles.css"> -->
+        <!-- <link rel="icon" href="/images/accounter-logo.svg"> -->
+    </head>
+    
+    <body>
+        
+        
+        <div id="main-container">
+            <!-- <header th:replace="~{base :: header}"></header> -->
+            <h2>Transaction History</h2>
+            <hr>
+            <div id="container-transactions">
+                <div id="account-select">
+                    <form class="form" action="transactionlist" method="get">
+                        <p>Please select account(s)</p>
+                        <!-- <label th:each="account: ${accounts}" th:text="${account.accountName} ">Account1 -->
+                        <div  th:each="account: ${accounts}">
+                            <div class="checkbox-account">
+                                <input class="checkbox"  type="checkbox" checked th:value="${account.name}"  >
+                                <label th:text="${account.name}"></label>
+                            </div>
+                           
+                        </div>
+                        <input type="submit" name="filter" value="Apply Filter">
+                    </form>
+                </div>
+                <table>
+                    <tr>
+                        <th>Account</th>
+                        <th>Record Type</th>
+                        <th>Amount</th>
+                        <th>Running balance</th>
+                    </tr>
+                    <tr th:each="transaction: ${transactions}">
+                        <td th:text="${transaction.accountName}">Account</td>
+                        <td th:text="${transaction.type}">expense</td>
+                        <td th:text="${transaction.amount}">1000</td>
+                        <td th:text="${transaction.balance}">5000</td>
+                    </tr>
+                    
+                </table>
+            </div>
+            
+        </div>
+
+    </body>
+</html>

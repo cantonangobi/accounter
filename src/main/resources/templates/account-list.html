@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accounter - Accounts</title>
+        <link rel="stylesheet" href="css/styles.css">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Round&display=swap" rel="stylesheet">
+    </head>
+    <body>
+	<header>
+		<div id="navbar">
+			<div id="logo">
+				<a href="/">Accounter</a>
+			</div>
+			<div id="nav-links" class="box-horizontal">
+				<a class="nav-link" href="/">Dashboard</a>
+				<a id="nav-link-active" class="nav-link" href="accountlist">Accounts</a>
+				<a class="nav-link" href="transactionlist">Transactions</a>
+			</div>
+			<a id="logout" href="logout">Logout</a>
+		</div>
+	</header>
+	<br><br>
+	<div class="box-horizontal">
+		<div class="sidebar box-vertical box-primary">
+			<h1>Accounts</h1>
+			<a class="btn-primary" href="account-create">Add Account</a>
+		</div>
+		<div class="box-vertical box-primary cols-3">
+			<a th:each="account: ${accounts}" th:id="|btn-${account.name}|" th:href="|/accountdetails/${account.name}|" class="list-item">
+				<span th:text="${account.name}">Account Name</span>
+				<span th:text="|KES. ${account.balance}|">balance</span>
+			</a>
+			<!-- <div class="list-item">
+				<span>Account Name</span>
+				<span>balance</span>
+			</div>
+			<div class="list-item">
+				<span>Account Name</span>
+				<span>balance</span>
+			</div>
+			<div class="list-item">
+				<span>Account Name</span>
+				<span>balance</span>
+			</div> -->
+		</div>
+		
+	</div>
+	<!-- <script src="/js/account-list.js"></script> -->
+    </body>
+</html>

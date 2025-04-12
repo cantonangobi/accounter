@@ -2,13 +2,19 @@ package com.example.accounter;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.accounter.account.Account;
 import com.example.accounter.account.AccountService;
+import com.example.accounter.transaction.Transaction;
+import com.example.accounter.transaction.TransactionService;
 import com.example.accounter.user.UserService;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import lombok.AllArgsConstructor;
 
@@ -17,6 +23,7 @@ import lombok.AllArgsConstructor;
 public class AppController {
     private AccountService accountService;
     private UserService userService;
+    private TransactionService transactionService;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -32,9 +39,14 @@ public class AppController {
         return "signup";
     }
 
-    @RequestMapping("/createaccount")
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/account-create")
     public String newAccount(){
-        return "createaccount";
+        return "account-create";
     }
 
     @RequestMapping("/deleteaccount")
@@ -50,6 +62,47 @@ public class AppController {
         List<Account> accounts = accountService.getAccounts();
         model.addAttribute("accounts", accounts);
         return "addrecord";
+    }
+
+    @RequestMapping("/accountlist")
+    public String accountList(Model model){
+        List<Account> accounts = accountService.getAccounts();
+
+        model.addAttribute("accounts", accounts);        
+
+        return "account-list";
+    }
+
+    @RequestMapping("/accountdetails/{name}")
+    public String accountDetails(@PathVariable("name") String accountName, Model model){
+        System.out.println(accountName);
+        Account account = accountService.getAccount(accountName);
+        List<Transaction> transactions = transactionService.getAccountTransactions(accountName);
+        if (account == null) {
+            return "resource-not-found";
+        }
+
+        model.addAttribute("account", account);
+        model.addAttribute("transactions", transactions);
+        return "account-details";
+    }
+
+    // @RequestMapping("/error")
+    // public String notFound(){
+    //     return "resource-not-found";
+    // }
+
+    @RequestMapping("/transactionlist")
+    public String TransactionList(Model model){
+        List<Account> accounts = accountService.getAccounts();
+        List<Transaction> transactions = transactionService.getUserTransactions();
+
+        model.addAttribute("accounts", accounts);
+        model.addAttribute("transactions", transactions);
+        
+        System.out.println(model.getAttribute("transactions"));
+
+        return "transactionlist";
     }
 
     

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Accounter - Sign Up</title>
+        <title>Accounter - Log In</title>
         <link rel="stylesheet" href="/css/styles.css">
         <link rel="stylesheet" href="/css/login.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,21 +19,21 @@
             </div>
             <div class="box-secondary full-width">
                 <div id="box-login">
-                    <h1>Sign Up</h1>
-                    <form id="form-signup" class="box-vertical" action="/" method="post" >
+                    <h1>Log In</h1>
+                    <form class="box-vertical" method="post" action="/login">
                         <label>Email</label><br>
-                        <input type="email" placeholder="email" name="email" required><br>
+                        <input type="email" placeholder="email" name="username" required><br>
                         <label>Password</label><br>
-                        <input placeholder="password" name="password" required><br>
-                        <button type="submit" class="btn-primary btn-form">Sign Up</button><br>
+                        <input type="password" placeholder="password" name="password" required><br>
+                        <button class="btn-primary btn-form">Login</button><br>
                     </form>
                     <hr>
-                    <p>Already have an account? <a href="login">Login</a></p>
+                    <p>Don't have an account? <a href="/signup">Sign Up</a></p>
                 </div>
                 
             </div>
         </div>
         
-        <script src="/js/create_user.js"></script>
+        
     </body>
 </html>

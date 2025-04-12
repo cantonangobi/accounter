@@ -44,7 +44,7 @@ public class AccountService {
         }
 
         accountRepository.save(account);
-        return "Account Changes saved";
+        return "Success";
     }
 
     public String createAccount(Account account){
@@ -56,7 +56,7 @@ public class AccountService {
             return "Account not added, already exists";
         }
         accountRepository.save(account);
-        return "Account added";
+        return "Success";
     }
 
     public String deleteAccount(String name){
@@ -71,7 +71,7 @@ public class AccountService {
         accountRepository.delete(account);
         // accountRepository.deleteByAccountId(account.getAccountId());
 
-        return "Account has been deleted";
+        return "Success";
     }
 
     public AppUser getUser(){

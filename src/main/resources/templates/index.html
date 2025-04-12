@@ -1,39 +1,38 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<html>
     <head>
-        <title>Accounter</title>
-        <!-- <link rel="stylesheet" href="/css/styles.css"> -->
-        <!-- <link rel="icon" href="/images/accounter-logo.svg"> -->
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accounter - Dashboard</title>
+        <link rel="stylesheet" href="/css/styles.css">
+		<link rel="stylesheet" href="/css/dashboard.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Round&display=swap" rel="stylesheet">
     </head>
-    
     <body>
-       
-        
-        <div id="main-container">
-            
-
-            <h1 th:text = "|Hello ${userName}|">Hello User</h1>
-            <hr>
-            <!-- <header th:replace="~{base :: header}"></header> -->
-
-            <div >
-                <P th:each="account: ${accounts}" th:text="|${account.name} balance is ${account.balance}|">your current balance is 50000</p>
-            </div>
-            
-            <hr>
-            <div id="container-actions">
-                <a class="button" href="createaccount">New Account</a>
-                <a class="button" href="changebalance">Change Balance</a>
-                <a class="button" href="deleteaccount">Delete Account</a>
-                <a class="button" href="newrecord">New Record</a>
-                <a class="button" href="transactionlist">View Records</a>
-                <a class="button" href="logout">Log Out</a>
-                <!-- <a href="signup">Reset Account</a> -->
-            </div>
-        </div>
-        <!-- <footer th:replace="~{base :: footer}"></footer> -->
+		<header>
+			<div id="navbar">
+				<div id="logo">
+					<a href="/">Accounter</a>
+				</div>
+				<div id="nav-links" class="box-horizontal">
+					<a id="nav-link-active" class="nav-link" href="/">Dashboard</a>
+					<a class="nav-link" href="accountlist">Accounts</a>
+					<a class="nav-link" href="transactionlist">Transactions</a>
+				</div>
+				<a id="logout" href="/logout">Logout</a>
+			</div>
+		</header>
+		<br><br>
+		<div id="box-dashboard">
+			<div>
+				<h1>Under Construction</h1>
+				<p>We are still building the Dashboard, check again soon.</p>
+				<a class="btn-primary" href="accountlist">Go to Accounts</a>
+				<a class="btn-primary" href="transactionlist">Go to Transactions</a>
+			</div>
+			
+		</div>
     </body>
 </html>

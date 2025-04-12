@@ -27,7 +27,8 @@ public class UserService implements UserDetailsService {
         boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
 
         if (userExists){
-            throw new IllegalStateException("email already exists");
+            System.out.println("This email exists");
+            return "Account not created, email already exists";
         }
         
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
@@ -36,7 +37,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         //TODO: Send confirmation token
         
-        return "it works";
+        return "Success";
     }
 
     public AppUser getSessionUser(){

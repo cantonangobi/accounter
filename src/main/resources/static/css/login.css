@@ -1,0 +1,32 @@
+/* Login/signup */
+/* #login-root{
+    display: flex;
+    position: absolute;
+    top: 0; left: 0;
+} */
+
+#gradient-box{
+    background: #113632;
+    background: linear-gradient(#113632 0%, #309c91 100%); 
+    /* width: 100%; */
+}
+
+
+
+
+
+#box-login {
+    min-width: 50%;
+}
+#box-login form{
+    margin-top: 20px;
+    padding: 1px;
+}
+
+/* #box-login input{
+    font-size: inherit;
+    padding: 10px;
+    margin: 5px;
+} */
+
+
