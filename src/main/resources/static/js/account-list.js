@@ -10,7 +10,7 @@ function btn_account_onclick(){
     var accountName = button.id;
     console.log(accountName);
     alert("element clicked");
-    fetch("api/v1/account/get", {
+    fetch("/api/v1/account/get", {
         //todo: implement fetch method
     });
     //todo: complete onclick method

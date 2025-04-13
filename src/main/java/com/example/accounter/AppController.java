@@ -52,6 +52,12 @@ public class AppController {
         
     }
 
+    @RequestMapping("/account-delete-confirmation")
+    public String accountDeleteConfirmation(){
+        return "account-delete-confirmation";
+    }
+
+
     @RequestMapping("/account-list")
     public String getAccountList(Model model){
         List<Account> accounts = accountService.getAccounts();

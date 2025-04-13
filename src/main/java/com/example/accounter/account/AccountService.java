@@ -35,6 +35,18 @@ public class AccountService {
         return account;
     }
 
+    
+    public Account getAccount(Long accountId){
+        this.user = this.userService.getSessionUser();
+        boolean accountExists = accountRepository.findByAccountIdAndUserId(accountId, user.getUserId()).isPresent();
+        if (!accountExists){
+            System.out.println("Account not found");
+            return null;
+        }
+        Account account = accountRepository.getReferenceById(accountId);
+        return account;
+    }
+
 
     public String updateAccount(Long accountId, Account account){
         Account currentAccount = accountRepository.getReferenceById(accountId);
@@ -62,6 +74,24 @@ public class AccountService {
         accountRepository.save(account);
         return "Success";
     }
+
+
+    public String deleteAccount(Long accountId){
+        this.user = this.userService.getSessionUser();
+        boolean accountExists  = accountRepository.findByAccountIdAndUserId(accountId, user.getUserId()).isPresent();
+        if (!accountExists){
+            System.out.println("Account does not exist");
+            return "Account does not exist";
+        }
+        Account account = accountRepository.getReferenceById(accountId);
+        System.out.println(account.toString());
+        accountRepository.deleteById(accountId);
+        // accountRepository.delete(account);
+        // accountRepository.deleteByAccountId(account.getAccountId());
+
+        return "Success";
+    }
+
 
     public String deleteAccount(String name){
         this.user = this.userService.getSessionUser();

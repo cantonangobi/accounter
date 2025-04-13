@@ -3,6 +3,7 @@ package com.example.accounter.account;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +38,19 @@ public class AccountController {
         return accountService.updateAccount(request.getAccountId(), newAccount);
     }
 
-    @DeleteMapping(path = "/delete", consumes = "application/json")
-    public String deleteAccount(@RequestBody AccountRequest request){
+    @DeleteMapping(path = "/delete/{id}")
+    public String deleteAccount(@PathVariable("id") Long accountId){
         String response = "";
-        response += transactionService.deleteAccountTransactions(request.getName()) + "\n";
-        response += accountService.deleteAccount(request.getName());
+        String transactionDeleted = transactionService.deleteAccountTransactions(accountId);
+        String accountDeleted = accountService.deleteAccount(accountId);
+
+        if (transactionDeleted.equals("Success") && accountDeleted.equals("Success")) {
+            response = "Success";
+        }
+        else{
+            response =  transactionDeleted + "\n" + accountDeleted;
+        }
+
         return response;
     }
 

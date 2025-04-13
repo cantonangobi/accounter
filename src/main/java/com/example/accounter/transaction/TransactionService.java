@@ -81,7 +81,8 @@ public class TransactionService {
     }
 
     public Transaction getById(Long transactionId){
-        boolean transactionExists = transactionRepository.existsById(transactionId);
+        Long userId = accountService.getUser().getUserId();
+        boolean transactionExists = transactionRepository.findByTransactionIdAndUserId(transactionId, userId).isPresent();
         if(!transactionExists){
             System.out.println("Transaction doesn't exist");
             return null;
@@ -105,6 +106,28 @@ public class TransactionService {
         return "Transaction Deleted";
     }
 
+
+    public String deleteAccountTransactions(Long accountId){
+        // Account account = accountService.getAccount(accountName);
+        // boolean accountExists = accountR
+        // if (account == null){
+        //     System.out.println("Account doesn't exist");
+        //     return "Account doesn't exist";
+        // }
+        // System.out.println(account.toString());
+
+        Account account = accountService.getAccount(accountId);
+        if(account == null){
+            System.out.println("Account doesn't exist");
+            return "Account doesn't exist";
+        }
+        System.out.println(account);
+        transactionRepository.deleteAllByAccountId(accountId);
+
+        return "Success";
+    }
+
+
     public String deleteAccountTransactions(String accountName){
         Account account = accountService.getAccount(accountName);
         if (account == null){
@@ -114,7 +137,7 @@ public class TransactionService {
         System.out.println(account.toString());
         transactionRepository.deleteAllByAccountId(account.getAccountId());
 
-        return "Transactions deleted for the account " + accountName;
+        return "Success";
     }
 
     public String updateTransaction(Long transactionId, Transaction newTransaction){

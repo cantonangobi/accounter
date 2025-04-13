@@ -113,6 +113,7 @@ input,select{
 
 .btn-danger:hover {
     background-color: #880000;
+    cursor: pointer;
 }
 
 .btn-form{

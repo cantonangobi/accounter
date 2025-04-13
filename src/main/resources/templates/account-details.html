@@ -38,7 +38,7 @@
 				</div>
 				<div class="box-primary box-vertical flex-right">
 					<a th:href="|/account-update/${account.name}|" class="btn-primary ">Edit Account</a>
-					<p><button onclick="confirm('Are you Sure?')" class="btn-danger">Delete Account</button></p>
+					<p><button id="btn-delete" th:value="${account.accountId}" class="btn-danger">Delete Account</button></p>
 				</div>
 			</div>
 		</div>
@@ -76,5 +76,6 @@
 		</div>
 		
 	</div>
+	<script src="/js/delete_account.js" ></script>
     </body>
 </html>
