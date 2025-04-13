@@ -36,14 +36,18 @@ public class AccountService {
     }
 
 
-    public String updateAccount(Account account){
-        boolean accountExists = accountRepository.existsById(account.getAccountId());
-        if (!accountExists){
+    public String updateAccount(Long accountId, Account account){
+        Account currentAccount = accountRepository.getReferenceById(accountId);
+        // boolean accountExists = accountRepository.existsById(account.getAccountId());
+        if (currentAccount == null){
             System.out.println("Account doesn't exist");
             return "Account doesn't exist";
         }
+        
+        currentAccount.setName(account.getName());
+        currentAccount.setBalance(account.getBalance());
 
-        accountRepository.save(account);
+        accountRepository.save(currentAccount);
         return "Success";
     }
 

@@ -37,7 +37,7 @@
 					<p th:text="|Balance: KES ${account.balance}|" >Account Balance: 000000</p>
 				</div>
 				<div class="box-primary box-vertical flex-right">
-					<a href="account-create" class="btn-primary ">Edit Account</a>
+					<a th:href="|/account-update/${account.name}|" class="btn-primary ">Edit Account</a>
 					<p><button onclick="confirm('Are you Sure?')" class="btn-danger">Delete Account</button></p>
 				</div>
 			</div>

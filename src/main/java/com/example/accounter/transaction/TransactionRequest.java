@@ -15,5 +15,4 @@ public class TransactionRequest {
     private String category;
     private String type;
     private Double amount;
-    private Double balance;
 }

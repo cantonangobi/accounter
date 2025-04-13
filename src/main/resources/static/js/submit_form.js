@@ -7,6 +7,7 @@ function initializeForm(form_id){
 function submitForm(){
     event.preventDefault();
     let data = parse_form(this);
+    console.log(data);
     send_to_backend(api_url, data, success_url);
 }
 

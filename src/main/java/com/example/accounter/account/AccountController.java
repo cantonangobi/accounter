@@ -34,7 +34,7 @@ public class AccountController {
     @PostMapping(path = "/update", consumes = "application/json")
     public String updateAccount(@RequestBody AccountRequest request){
         Account newAccount = new Account(request.getName(), request.getBalance());
-        return accountService.updateAccount(newAccount);
+        return accountService.updateAccount(request.getAccountId(), newAccount);
     }
 
     @DeleteMapping(path = "/delete", consumes = "application/json")

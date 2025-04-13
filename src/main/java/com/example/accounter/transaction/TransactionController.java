@@ -29,8 +29,7 @@ public class TransactionController {
                                                     account.getName(),
                                                     request.getCategory(), 
                                                     request.getType(), 
-                                                    request.getAmount(), 
-                                                    account.getBalance());
+                                                    request.getAmount());
 
         return transactionService.createTransaction(transaction, account);
     }
@@ -69,8 +68,7 @@ public class TransactionController {
                                                     account.getName(),
                                                     request.getCategory(), 
                                                     request.getType(), 
-                                                    request.getAmount(), 
-                                                    request.getBalance());
+                                                    request.getAmount());
 
         return transactionService.updateTransaction(request.getTransactionId(), transaction);
     }   

@@ -1,5 +1,5 @@
-const form_id = "form-create-account";
-const api_url = "/api/v1/account/create";
+const form_id = "form-update-account"
+const api_url = "/api/v1/account/update";
 const success_url = "/account-list";
 
 initializeForm(form_id);

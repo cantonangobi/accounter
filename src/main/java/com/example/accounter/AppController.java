@@ -40,7 +40,7 @@ public class AppController {
     }
 
     @RequestMapping("/account-create")
-    public String newAccount(){
+    public String createAccount(){
         return "account-create";
     }
 
@@ -52,15 +52,8 @@ public class AppController {
         
     }
 
-    @RequestMapping("/addrecord")
-    public String addRecord(Model model){
-        List<Account> accounts = accountService.getAccounts();
-        model.addAttribute("accounts", accounts);
-        return "addrecord";
-    }
-
     @RequestMapping("/account-list")
-    public String accountList(Model model){
+    public String getAccountList(Model model){
         List<Account> accounts = accountService.getAccounts();
 
         model.addAttribute("accounts", accounts);        
@@ -69,7 +62,7 @@ public class AppController {
     }
 
     @RequestMapping("/account-details/{name}")
-    public String accountDetails(@PathVariable("name") String accountName, Model model){
+    public String getAccountDetails(@PathVariable("name") String accountName, Model model){
         System.out.println(accountName);
         Account account = accountService.getAccount(accountName);
         List<Transaction> transactions = transactionService.getAccountTransactions(accountName);
@@ -82,13 +75,26 @@ public class AppController {
         return "account-details";
     }
 
+    @RequestMapping("/account-update/{name}")
+    public String updateAccount(@PathVariable("name") String accountName, Model model){
+        System.out.println(accountName);
+        Account account = accountService.getAccount(accountName);
+        // List<Transaction> transactions = transactionService.getAccountTransactions(accountName);
+        if (account == null) {
+            return "resource-not-found";
+        }
+
+        model.addAttribute("account", account);
+        // model.addAttribute("transactions", transactions);
+        return "account-update";
+    }
     // @RequestMapping("/error")
     // public String notFound(){
     //     return "resource-not-found";
     // }
 
     @RequestMapping("/transaction-list")
-    public String TransactionList(Model model){
+    public String getTransactionList(Model model){
         List<Account> accounts = accountService.getAccounts();
         List<Transaction> transactions = transactionService.getUserTransactions();
 
@@ -101,7 +107,7 @@ public class AppController {
     }
 
     @RequestMapping("/transaction-create")
-    public String TransactionCreate(Model model){
+    public String createTransaction(Model model){
         List<Account> accounts = accountService.getAccounts();
         model.addAttribute("accounts", accounts);
 

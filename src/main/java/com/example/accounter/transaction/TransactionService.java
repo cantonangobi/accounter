@@ -34,8 +34,8 @@ public class TransactionService {
         // }
         balance = balance + amount;
         account.setBalance(balance);
-        accountService.updateAccount(account);
-        transaction.setBalance(balance);
+        accountService.updateAccount(account.getAccountId(), account);
+        // transaction.setBalance(balance);
         transactionRepository.save(transaction);
 
         return "Success";
@@ -53,6 +53,9 @@ public class TransactionService {
         Double transactionAmount = Math.abs(amount - account.getBalance());
         String transactionType;
     
+        if (amount == account.getBalance()){
+            return "No Change in Balance";
+        }
         if (amount > account.getBalance()){
             transactionType = "Income";
         }
@@ -65,8 +68,7 @@ public class TransactionService {
                                                     account.getName(),
                                                     "Adjustment", 
                                                     transactionType, 
-                                                    transactionAmount, 
-                                                    amount);
+                                                    transactionAmount);
         
         return this.createTransaction(transaction, account);
         
@@ -124,11 +126,10 @@ public class TransactionService {
 
         Transaction currentTransaction = transactionRepository.getReferenceById(transactionId);
         currentTransaction.setAmount(newTransaction.getAmount());
-        currentTransaction.setBalance(newTransaction.getBalance());
         currentTransaction.setType(newTransaction.getType());
 
         transactionRepository.save(currentTransaction);
-        return "Transaction updated";
+        return "Success";
     }
 
 }

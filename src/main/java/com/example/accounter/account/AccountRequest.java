@@ -10,6 +10,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class AccountRequest {
+    private final Long accountId;
     private final String name;
     private final Double balance;
 }
