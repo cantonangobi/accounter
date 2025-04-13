@@ -1,8 +1,8 @@
 
 let button_id = "btn-delete";
-let success_url = "/account_list";
+let success_url = "/account-delete-confirmation";
 
-let delete_button = document.getElementById("btn-delete");
+let delete_button = document.getElementById(button_id);
 let account_id = delete_button.getAttribute("value");
 let api_url = "/api/v1/account/delete/" + account_id;
 
@@ -18,7 +18,7 @@ function deleteAccount(){
         .then(message => {
             if (message == "Success"){
                 console.log(message);
-                window.location.href = "/account-delete-confirmation";
+                window.location.href = success_url;
             }
             else{
                 console.log(message);

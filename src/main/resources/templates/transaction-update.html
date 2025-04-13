@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accounter - Create Account</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/account.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Round&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        
+        
+        <div class="box-secondary box-fullscreen">
+            <a class="btn-primary btn-back" href="/transaction-list">Back</a>
+            <div id="box-create-form" class="box-vertical">
+                <h1>Edit Transaction</h1>
+                <form id="form-update-transaction" class="box-vertical">
+                    <input hidden type="text" name="transactionId" th:value="${transaction.transactionId}" >
+                    <label>Type</label><br>
+                    <select name="type">
+                        <option th:selected="${transaction.type == 'Expense'}" value="Expense">Expense</option>
+                        <option th:selected="${transaction.type == 'Income'}" value="Income">Income</option>
+                    </select><br>
+                    <label>Category</label><br>
+                    <select name="category">
+                        <option th:selected="${transaction.category == 'Food'}" value="Food">Food</option>
+                        <option th:selected="${transaction.category == 'Transport'}" value="Transport">Transport</option>
+                        <option th:selected="${transaction.category == 'Home'}" value="Home">Home</option>
+                        <option th:selected="${transaction.category == 'Enjoyment'}" value="Enjoyment">Enjoyment</option>
+                        <option th:selected="${transaction.category == 'Other'}" value="Other">Other</option>
+                        <option th:selected="${transaction.category == 'Income'}" value="Income">Income</option>
+                    </select><br>
+                    <label>Account Name</label><br>
+                    <select name="accountName" >
+                        <option th:each="account: ${accounts}" 
+                        th:value="${account.name}"
+                        th:text="${account.name}" 
+                        th:selected="${transaction.accountName == account.name}" >Account 1</option>
+                        <!-- <option>Account 2</option>
+                        <option>Account 3</option> -->
+                    </select><br>
+                    <label>Amount</label><br>
+                    <input type="number" th:placeholder="${transaction.amount}" name="amount" required th:value="${transaction.amount}"><br>
+                    <button class="btn-primary btn-form" type="submit" th:value="${transaction.transactionId}" >Save</button><br>
+                    
+                </form>
+                <button id="btn-delete" th:value="${transaction.transactionId}" class="btn-danger btn-form">Delete</button>
+            </div>
+            
+        </div>
+        
+        <script src="/js/submit_form.js"></script>
+        <script src="/js/update_transaction.js"></script>
+        <script src="/js/delete_transaction.js"></script>
+    </body>
+</html>

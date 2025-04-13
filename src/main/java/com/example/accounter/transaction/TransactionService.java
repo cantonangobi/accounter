@@ -80,15 +80,16 @@ public class TransactionService {
         return transactionRepository.findAllByUserId(user.getUserId()).get();
     }
 
-    public Transaction getById(Long transactionId){
+    public Transaction getTransactionById(Long transactionId){
         Long userId = accountService.getUser().getUserId();
-        boolean transactionExists = transactionRepository.findByTransactionIdAndUserId(transactionId, userId).isPresent();
-        if(!transactionExists){
+        System.out.println("Test 1");
+        Transaction transaction =  transactionRepository.getReferenceById(transactionId);
+        if(transaction.getUserId() == userId){
             System.out.println("Transaction doesn't exist");
             return null;
         }
 
-        return transactionRepository.getReferenceById(transactionId);
+        return transaction;
     }
 
     public List<Transaction> getAccountTransactions(String accountName){
@@ -96,13 +97,13 @@ public class TransactionService {
         return transactionRepository.findAllByAccountId(account.getAccountId()).get();
     }
 
-    public String deleteById(Long transactionId){
-        boolean transactionExists = transactionRepository.existsById(transactionId);
-        if (!transactionExists){
+    public String deleteTransactionById(Long transactionId){
+        Transaction transaction = getTransactionById(transactionId);
+        if (transaction == null){
             System.out.println("Transaction does not exist");
             return "Transaction does not exist";
         }
-        transactionRepository.deleteById(transactionId);
+        transactionRepository.delete(transaction);
         return "Transaction Deleted";
     }
 
@@ -148,6 +149,7 @@ public class TransactionService {
         }
 
         Transaction currentTransaction = transactionRepository.getReferenceById(transactionId);
+        currentTransaction.setCategory(newTransaction.getCategory());
         currentTransaction.setAmount(newTransaction.getAmount());
         currentTransaction.setType(newTransaction.getType());
 

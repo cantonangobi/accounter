@@ -54,11 +54,11 @@
 			</form>
 		</div>
 		<div  class="box-vertical box-primary cols-3">
-			<div th:each="transaction : ${transactions}" class="list-item">
+			<a th:each="transaction : ${transactions}" th:href="|/transaction-update/${transaction.transactionId}|" class="list-item">
 				<span th:text="${transaction.category}" >Transaction Category</span>
 				<span th:text="${transaction.accountName}" >Account Name</span>
 				<span th:text="|KES ${transaction.amount}|" >Amount</span>
-			</div>
+			</a>
 		<!--	<a href="#" class="list-item">
 				<span>Transaction Category</span>
 				<span>Tx Type</span>

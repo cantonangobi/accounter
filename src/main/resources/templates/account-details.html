@@ -29,7 +29,11 @@
 	<div id="box-root" class="box-vertical">
 		
 		<div class="box-primary box-vertical">
-			<a class="btn-primary btn-back" href="/account-list">Back</a>	
+			<div class="box-horizontal flex-space full-width">
+				<a class="btn-primary btn-back" href="/account-list">Back</a>
+				<h1 class="margin-auto">Account Details</h1>
+			</div>
+			
 			<div id="account-details" class="box-horizontal">
 				
 				<div class="box-primary box-vertical flex-left">
@@ -43,7 +47,10 @@
 			</div>
 		</div>
 		
-		<div id="box-account-transactions" class="box-primary box-list">
+		<div id="box-account-transactions" class="box-primary box-vertical">
+			<h2 th:text="|${account.name} Transactions|">Transactions</h2>
+			<hr class="full-width">
+			<a class="btn-primary ">Add Transaction</a>
 			<div th:each="transaction : ${transactions}" class="list-item">
 				<span th:text="${transaction.category}" >Transaction Category</span>
 				<span th:text="${transaction.accountName}" >Account Name</span>

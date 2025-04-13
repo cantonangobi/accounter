@@ -3,6 +3,7 @@ package com.example.accounter.transaction;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,12 @@ public class TransactionController {
         return transactionService.changeBalance(request.getAccountName(), request.getAmount());
     }
 
+    @RequestMapping(path = "/get/{id}")
+    public Transaction geTransaction(@PathVariable("id") Long transactionId){
+        return transactionService.getTransactionById(transactionId);
+
+    }
+
     @RequestMapping(path = "/getusertransactions")
     public List<Transaction> getUserTransactions(){
         return transactionService.getUserTransactions();
@@ -49,9 +56,9 @@ public class TransactionController {
         return transactionService.getAccountTransactions(request.getAccountName());
     }
 
-    @DeleteMapping(path = "/delete", consumes = "application/json")
-    public String deleteTransaction(@RequestBody TransactionRequest request){
-        return transactionService.deleteById(request.getTransactionId());
+    @DeleteMapping(path = "/delete/{id}")
+    public String deleteTransaction(@PathVariable("id") Long transactionId){
+        return transactionService.deleteTransactionById(transactionId);
     }
 
     @DeleteMapping(path = "/deleteaccounttransactions", consumes = "application/json")

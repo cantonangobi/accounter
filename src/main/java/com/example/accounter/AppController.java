@@ -120,7 +120,23 @@ public class AppController {
         return "transaction-create";
     }
 
+    @RequestMapping("/transaction-update/{id}")
+    public String updateTransaction(@PathVariable("id") Long transactionId, Model model){
+        List<Account> accounts = accountService.getAccounts();
+        model.addAttribute("accounts", accounts);
+        Transaction transaction = transactionService.getTransactionById(transactionId);
+        if (transaction == null){
+            return "resource-not-found";
+        }
+        model.addAttribute("transaction", transaction);
+
+        return "transaction-update";
+    }
     
+    // @RequestMapping("/transaction-delete/{id}")
+    // public String deleteTransaction(@PathVariable("id") Long transactionId, Model model){
+
+    // }
 }
 
 
