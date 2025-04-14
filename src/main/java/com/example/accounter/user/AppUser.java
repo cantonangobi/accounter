@@ -28,13 +28,13 @@ import lombok.Setter;
 public class AppUser implements UserDetails {
     @Id
     @SequenceGenerator(
-        name = "user_sequence",
-        sequenceName = "user_sequence",
+        name = "app_user_sequence",
+        sequenceName = "app_user_sequence",
         allocationSize = 1
     )
     @GeneratedValue(
         strategy = GenerationType.SEQUENCE,
-        generator = "user_sequence"
+        generator = "app_user_sequence"
     )
     private Long userId;
     private String username;

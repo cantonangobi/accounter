@@ -1,5 +1,5 @@
 
-function initializeForm(form_id){
+function processForm(form_id){
     const form = document.getElementById(form_id);
     form.addEventListener("submit", submitForm);
 }

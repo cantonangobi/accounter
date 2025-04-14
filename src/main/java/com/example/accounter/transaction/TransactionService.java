@@ -85,6 +85,7 @@ public class TransactionService {
         System.out.println("Test 1");
         Transaction transaction =  transactionRepository.getReferenceById(transactionId);
         if(transaction.getUserId() == userId){
+            System.out.println("Tx User id: " + transaction.getUserId());
             System.out.println("Transaction doesn't exist");
             return null;
         }
@@ -95,6 +96,11 @@ public class TransactionService {
     public List<Transaction> getAccountTransactions(String accountName){
         Account account = accountService.getAccount(accountName);
         return transactionRepository.findAllByAccountId(account.getAccountId()).get();
+    }
+
+    
+    public List<Transaction> getAccountTransactions(Long accountId){
+        return transactionRepository.findAllByAccountId(accountId).get();
     }
 
     public String deleteTransactionById(Long transactionId){
@@ -152,6 +158,7 @@ public class TransactionService {
         currentTransaction.setCategory(newTransaction.getCategory());
         currentTransaction.setAmount(newTransaction.getAmount());
         currentTransaction.setType(newTransaction.getType());
+        currentTransaction.setAccountName(newTransaction.getAccountName());
 
         transactionRepository.save(currentTransaction);
         return "Success";

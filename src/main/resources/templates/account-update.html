@@ -14,24 +14,24 @@
         
         
         <div class="box-fullscreen box-secondary">
-            <a class="btn-primary btn-back" th:href="|/account-details/${account.name}">Back</a>
+            <a class="btn-primary btn-back" th:href="|/account-details/${account.accountId}">Back</a>
             <div id="box-create-form" class="box-vertical">
                 <h1>Add Account</h1>
                 <form id="form-update-account" class="box-vertical" method="post">
-                    <input hidden type="text" th:value="${account.accountId}" name="accountId" required><br>
+                    <!-- <input hidden type="text" th:value="${account.accountId}" name="accountId" required><br> -->
                     <label>Account Name</label><br>
                     <input type="text" th:placeholder="${account.name}" th:value="${account.name}" name="name" required><br>
                     <label>Current Balance</label><br>
                     <input type="number" th:placeholder="${account.balance}" th:value="${account.balance}" name="balance" required><br>
-                    <button class="btn-primary">Save</button><br>
+                    <button id="btn-submit" class="btn-primary" th:value="${account.accountId}" name="submit" >Save</button><br>
                 </form>
             </div>
         </div>
         
         <!-- <script src="/js/scripts.js" ></script> -->
 
-        <script src="/js/submit_form.js" ></script>
-        <script src="/js/update_account.js"></script>
+        <script src="/js/form_handler.js" ></script>
+        <script src="/js/account/update_account.js"></script>
         
     </body>
 </html>

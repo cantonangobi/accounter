@@ -25,6 +25,10 @@ public class AccountController {
     public List<Account> getAccounts(){   
         return accountService.getAccounts();
     }
+    @RequestMapping("/getaccount/{id}")
+    public Account geAccount(@PathVariable("id") Long accountId){
+        return accountService.getAccount(accountId);
+    }
     
     @PostMapping(path = "/create", consumes = "application/json")
     public String createAccount(@RequestBody AccountRequest request){
@@ -32,7 +36,7 @@ public class AccountController {
         return accountService.createAccount(newAccount);
     }
 
-    @PostMapping(path = "/update", consumes = "application/json")
+    @PostMapping(path = "/update/{id}", consumes = "application/json")
     public String updateAccount(@RequestBody AccountRequest request){
         Account newAccount = new Account(request.getName(), request.getBalance());
         return accountService.updateAccount(request.getAccountId(), newAccount);
