@@ -35,18 +35,7 @@ public class TransactionController {
         return transactionService.createTransaction(transaction, account);
     }
 
-    @PostMapping(path = "/changebalance", consumes = "application/json")
-    public String changeBalance(@RequestBody TransactionRequest request){
-        return transactionService.changeBalance(request.getAccountName(), request.getAmount());
-    }
-
-    @RequestMapping(path = "/get/{id}")
-    public Transaction geTransaction(@PathVariable("id") Long transactionId){
-        return transactionService.getTransactionById(transactionId);
-
-    }
-
-    @RequestMapping(path = "/getusertransactions")
+    @RequestMapping(path = "/gettransactions")
     public List<Transaction> getUserTransactions(){
         return transactionService.getUserTransactions();
     }
@@ -56,6 +45,12 @@ public class TransactionController {
         return transactionService.getAccountTransactions(request.getAccountName());
     }
 
+    @RequestMapping(path = "/get/{id}")
+    public Transaction getTransaction(@PathVariable("id") Long transactionId){
+        return transactionService.getTransactionById(transactionId);
+
+    }    
+
     @DeleteMapping(path = "/delete/{id}")
     public String deleteTransaction(@PathVariable("id") Long transactionId){
         return transactionService.deleteTransactionById(transactionId);
@@ -64,6 +59,11 @@ public class TransactionController {
     @DeleteMapping(path = "/deleteaccounttransactions", consumes = "application/json")
     public String deleteAccountTransactions(@RequestBody TransactionRequest request){
         return transactionService.deleteAccountTransactions(request.getAccountName());
+    }
+
+     @PostMapping(path = "/changebalance", consumes = "application/json")
+    public String changeBalance(@RequestBody TransactionRequest request){
+        return transactionService.changeBalance(request.getAccountName(), request.getAmount());
     }
 
     @PostMapping(path = "/update", consumes = "application/json")

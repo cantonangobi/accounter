@@ -39,19 +39,16 @@ public class AppController {
         return "login";
     }
 
-    
+//Account Section    
     @RequestMapping("/account-list")
     public String getAccountList(Model model){
         List<Account> accounts = accountService.getAccounts();
-
         model.addAttribute("accounts", accounts);        
-
         return "account-list";
     }
 
     @RequestMapping("/account-details/{id}")
     public String getAccountDetails(@PathVariable("id") Long accountId, Model model){
-        // System.out.println(accountId);
         Account account = accountService.getAccount(accountId);
         if (account == null) {
             return "resource-not-found";
@@ -63,7 +60,6 @@ public class AppController {
         return "account-details";
     }
 
-    //This will connect to the backend using javascript and fetch api
     @RequestMapping("/account-create")
     public String createAccount(){
         return "account-create";
@@ -76,17 +72,14 @@ public class AppController {
             return "resource-not-found";
         }
         model.addAttribute("account", account);
-        // model.addAttribute("transactions", transactions);
         return "account-update";
     }
 
-    //This will connect to the backend using javascript and fetch api
     @RequestMapping("/deleteaccount")
     public String deleteAccount(Model model){
         List<Account> accounts = accountService.getAccounts();
         model.addAttribute("accounts", accounts);
         return "deleteaccount";
-        
     }
 
     @RequestMapping("/account-delete-confirmation")
@@ -94,35 +87,21 @@ public class AppController {
         return "account-delete-confirmation";
     }
 
-
-
-    
-
-   
-    // @RequestMapping("/error")
-    // public String notFound(){
-    //     return "resource-not-found";
-    // }
+//Transactions section
+    @RequestMapping("/transaction-create")
+    public String createTransaction(Model model){
+        List<Account> accounts = accountService.getAccounts();
+        model.addAttribute("accounts", accounts);
+        return "transaction-create";
+    }
 
     @RequestMapping("/transaction-list")
     public String getTransactionList(Model model){
         List<Account> accounts = accountService.getAccounts();
         List<Transaction> transactions = transactionService.getUserTransactions();
-
         model.addAttribute("accounts", accounts);
         model.addAttribute("transactions", transactions);
-        
-        System.out.println(model.getAttribute("transactions"));
-
         return "transaction-list";
-    }
-
-    @RequestMapping("/transaction-create")
-    public String createTransaction(Model model){
-        List<Account> accounts = accountService.getAccounts();
-        model.addAttribute("accounts", accounts);
-
-        return "transaction-create";
     }
 
     @RequestMapping("/transaction-update/{id}")
@@ -137,11 +116,6 @@ public class AppController {
 
         return "transaction-update";
     }
-    
-    // @RequestMapping("/transaction-delete/{id}")
-    // public String deleteTransaction(@PathVariable("id") Long transactionId, Model model){
-
-    // }
 }
 
 
