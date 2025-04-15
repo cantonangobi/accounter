@@ -19,6 +19,8 @@
                 <h1>Edit Transaction</h1>
                 <form id="form-update-transaction" class="box-vertical">
                     <!-- <input hidden type="text" name="transactionId" th:value="${transaction.transactionId}" > -->
+                    <label>Date</label><br>
+                    <input type="date" name="date" th:value="${transaction.date}">
                     <label>Type</label><br>
                     <select name="type">
                         <option th:selected="${transaction.type == 'Expense'}" value="Expense">Expense</option>
@@ -44,7 +46,7 @@
                     </select><br>
                     <label>Amount</label><br>
                     <input type="number" th:placeholder="${transaction.amount}" name="amount" required th:value="${transaction.amount}"><br>
-                    <button class="btn-primary btn-form" type="submit" th:value="${transaction.transactionId}" name="save">Save</button><br>
+                    <button id="btn-save" class="btn-primary btn-form" type="submit" th:value="${transaction.transactionId}" name="save">Save</button><br>
                     
                 </form>
                 <button id="btn-delete" name="delete" th:value="${transaction.transactionId}" class="btn-danger btn-form">Delete</button>

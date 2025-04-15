@@ -32,3 +32,8 @@
     /* margin: auto; */
     margin-right: auto;
 }
+
+.date-line{
+    /* background-color: #DDD; */
+    font-weight:500;
+}

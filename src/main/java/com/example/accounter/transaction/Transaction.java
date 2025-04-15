@@ -1,5 +1,8 @@
 package com.example.accounter.transaction;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +34,7 @@ public class Transaction {
     private String category;
     private String type;
     private Double amount;
+    private LocalDate date;
 
     // public Transaction(String type, Double amount, Double balance){
     //     this.type = type;
@@ -38,6 +42,15 @@ public class Transaction {
     //     this.balance = balance;
     // }
     
+    public Transaction(Long userId, Long accountId, String accountName, String category, String type, Double amount, LocalDate date){
+        this.userId = userId;
+        this.accountId = accountId;
+        this.accountName = accountName;    
+        this.category = category;            
+        this.type = type;
+        this.amount = amount;
+        this.date = date;
+    }
     public Transaction(Long userId, Long accountId, String accountName, String category, String type, Double amount){
         this.userId = userId;
         this.accountId = accountId;
@@ -45,6 +58,7 @@ public class Transaction {
         this.category = category;            
         this.type = type;
         this.amount = amount;
+        this.date = LocalDate.now();
     }
 
     @Override

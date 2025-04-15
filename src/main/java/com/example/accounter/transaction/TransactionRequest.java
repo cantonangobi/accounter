@@ -1,5 +1,7 @@
 package com.example.accounter.transaction;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,5 @@ public class TransactionRequest {
     private String category;
     private String type;
     private Double amount;
+    private LocalDate date;
 }

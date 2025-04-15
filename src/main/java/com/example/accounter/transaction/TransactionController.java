@@ -30,7 +30,9 @@ public class TransactionController {
                                                     account.getName(),
                                                     request.getCategory(), 
                                                     request.getType(), 
-                                                    request.getAmount());
+                                                    request.getAmount(),
+                                                    request.getDate()
+                                                    );
 
         return transactionService.createTransaction(transaction, account);
     }
@@ -52,8 +54,8 @@ public class TransactionController {
     }    
 
     
-    @PostMapping(path = "/update", consumes = "application/json")
-    public String updateTransaction(@RequestBody TransactionRequest request){
+    @PostMapping(path = "/update/{id}", consumes = "application/json")
+    public String updateTransaction(@PathVariable("id") long transactionId, @RequestBody TransactionRequest request){
         Account account = accountService.getAccount(request.getAccountName());
         // Transaction transaction = transactionService.getById(request.getTransactionId());
         Transaction transaction = new Transaction(account.getUserId(), 
@@ -61,9 +63,11 @@ public class TransactionController {
                                                     account.getName(),
                                                     request.getCategory(), 
                                                     request.getType(), 
-                                                    request.getAmount());
+                                                    request.getAmount(),
+                                                    request.getDate()
+                                                    );
 
-        return transactionService.updateTransaction(request.getTransactionId(), transaction);
+        return transactionService.updateTransaction(transactionId, transaction);
     }   
 
     @DeleteMapping(path = "/delete/{id}")
@@ -76,9 +80,9 @@ public class TransactionController {
         return transactionService.deleteAccountTransactions(request.getAccountName());
     }
 
-     @PostMapping(path = "/changebalance", consumes = "application/json")
-    public String changeBalance(@RequestBody TransactionRequest request){
-        return transactionService.changeBalance(request.getAccountName(), request.getAmount());
-    }
+    //  @PostMapping(path = "/changebalance", consumes = "application/json")
+    // public String changeBalance(@RequestBody TransactionRequest request){
+    //     return transactionService.changeBalance(request.getAccountName(), request.getAmount());
+    // }
 
 }

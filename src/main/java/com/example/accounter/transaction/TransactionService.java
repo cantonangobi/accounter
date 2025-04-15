@@ -1,5 +1,6 @@
 package com.example.accounter.transaction;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -41,40 +42,6 @@ public class TransactionService {
         return "Success";
     }
 
-    public String changeBalance(String name, Double amount){
-        // this.user = this.userService.getSessionUser();
-        Account account = accountService.getAccount(name);
-
-        if (account == null){
-            System.out.println("Account doesn't exist");
-            return "Account doesn't exist";
-        }
-
-        Double transactionAmount = Math.abs(amount - account.getBalance());
-        String transactionType;
-    
-        if (amount == account.getBalance()){
-            return "No Change in Balance";
-        }
-        if (amount > account.getBalance()){
-            transactionType = "Income";
-        }
-        else{
-            transactionType = "Expense";
-        }
-        
-        Transaction transaction = new Transaction(account.getUserId(), 
-                                                    account.getAccountId(), 
-                                                    account.getName(),
-                                                    "Adjustment", 
-                                                    transactionType, 
-                                                    transactionAmount);
-        
-        return this.createTransaction(transaction, account);
-        
-        
-    }
-
     public List<Transaction> getUserTransactions(){
         AppUser user = accountService.getUser();
         return transactionRepository.findAllByUserId(user.getUserId()).get();
@@ -96,6 +63,13 @@ public class TransactionService {
         return transaction;
     }
 
+    // public List<LocalDate> getTransactionDates(Long accountId){
+    //     Account account = accountService.getAccount(accountId);
+    //     if(account == null){
+    //         System.out.println();
+    //     }
+    // }
+
     public List<Transaction> getAccountTransactions(String accountName){
         Account account = accountService.getAccount(accountName);
         return transactionRepository.findAllByAccountId(account.getAccountId()).get();
@@ -104,6 +78,27 @@ public class TransactionService {
     
     public List<Transaction> getAccountTransactions(Long accountId){
         return transactionRepository.findAllByAccountId(accountId).get();
+    }
+
+    
+    public String updateTransaction(Long transactionId, Transaction newTransaction){
+        boolean transactionExists = transactionRepository.existsById(transactionId);
+        if (!transactionExists){
+            System.out.println("Transaction does not exist");
+            return "Transaction does not exist";
+        }
+
+        newTransaction.setTransactionId(transactionId);
+        // Transaction currentTransaction = transactionRepository.getReferenceById(transactionId);
+        // currentTransaction.setCategory(newTransaction.getCategory());
+        // currentTransaction.setAmount(newTransaction.getAmount());
+        // currentTransaction.setType(newTransaction.getType());
+        // currentTransaction.setAccountName(newTransaction.getAccountName());
+        // currentTransaction.setAccountId(newTransaction.getAccountId());
+        // currentTransaction.set
+
+        transactionRepository.save(newTransaction);
+        return "Success";
     }
 
     public String deleteTransactionById(Long transactionId){
@@ -147,24 +142,6 @@ public class TransactionService {
         System.out.println(account.toString());
         transactionRepository.deleteAllByAccountId(account.getAccountId());
 
-        return "Success";
-    }
-
-    public String updateTransaction(Long transactionId, Transaction newTransaction){
-        boolean transactionExists = transactionRepository.existsById(transactionId);
-        if (!transactionExists){
-            System.out.println("Transaction does not exist");
-            return "Transaction does not exist";
-        }
-
-        Transaction currentTransaction = transactionRepository.getReferenceById(transactionId);
-        currentTransaction.setCategory(newTransaction.getCategory());
-        currentTransaction.setAmount(newTransaction.getAmount());
-        currentTransaction.setType(newTransaction.getType());
-        currentTransaction.setAccountName(newTransaction.getAccountName());
-        currentTransaction.setAccountId(newTransaction.getAccountId());
-
-        transactionRepository.save(currentTransaction);
         return "Success";
     }
 

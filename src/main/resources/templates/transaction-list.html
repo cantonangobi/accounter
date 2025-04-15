@@ -54,18 +54,23 @@
 			</form>
 		</div>
 		<div  class="box-vertical box-primary cols-3">
-			<div th:each="transaction : ${transactions}"  class="list-item">
-				<span th:text="${transaction.category}" >Transaction Category</span>
-				<span th:text="${transaction.accountName}" >Account Name</span>
-				<span th:text="|KES ${transaction.amount}|" >Amount</span>
-				<div class="box-horizontal">
-					<a class="btn-primary" th:href="|/transaction-update/${transaction.transactionId}|">
-						<i class="fa fa-pencil" aria-hidden="true"></i>
-					</a>
-					<button name="delete" th:value="${transaction.transactionId}" class="btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
-					</button>
+			<div  th:each="date : ${dates}"  class="box-vertical full-width date-container">
+				<div class="date-line" th:text="|${date}:|" >Date</div>
+				<div th:each="transaction : ${transactions}" th:if="${transaction.date} == ${date}"  class="list-item">
+					<span th:text="${transaction.category}" >Transaction Category</span>
+					<span th:text="${transaction.accountName}" >Account Name</span>
+					<span th:text="|KES ${transaction.amount}|" >Amount</span>
+					<!-- <span th:text="${transaction.date}" >Transaction Category</span> -->
+					<div class="box-horizontal">
+						<a class="btn-primary" th:href="|/transaction-update/${transaction.transactionId}|">
+							<i class="fa fa-pencil" aria-hidden="true"></i>
+						</a>
+						<button name="delete" th:value="${transaction.transactionId}" class="btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+						</button>
+					</div>
 				</div>
 			</div>
+			
 		<!--	<a href="#" class="list-item">
 				<span>Transaction Category</span>
 				<span>Tx Type</span>
