@@ -19,6 +19,18 @@ public class AccountService {
         this.userService = userService;
     }
 
+    public String createAccount(Account account){
+        this.user = this.userService.getSessionUser();
+        account.setUserId(user.getUserId());
+        boolean accountExists = accountRepository.findByUserIdAndName(account.getUserId(), account.getName()).isPresent();
+        if (accountExists){
+            System.out.println("Account not added, already exists");
+            return "Account not added, already exists";
+        }
+        accountRepository.save(account);
+        return "Success";
+    }
+
     public List<Account> getAccounts(){
         this.user = this.userService.getSessionUser();
         return accountRepository.findAllByUserId(user.getUserId()).get();
@@ -49,7 +61,7 @@ public class AccountService {
 
 
     public String updateAccount(Long accountId, Account account){
-        Account currentAccount = accountRepository.getReferenceById(accountId);
+        Account currentAccount = getAccount(accountId);
         // boolean accountExists = accountRepository.existsById(account.getAccountId());
         if (currentAccount == null){
             System.out.println("Account doesn't exist");
@@ -63,18 +75,7 @@ public class AccountService {
         return "Success";
     }
 
-    public String createAccount(Account account){
-        this.user = this.userService.getSessionUser();
-        account.setUserId(user.getUserId());
-        boolean accountExists = accountRepository.findByUserIdAndName(account.getUserId(), account.getName()).isPresent();
-        if (accountExists){
-            System.out.println("Account not added, already exists");
-            return "Account not added, already exists";
-        }
-        accountRepository.save(account);
-        return "Success";
-    }
-
+   
 
     public String deleteAccount(Long accountId){
         this.user = this.userService.getSessionUser();
@@ -86,8 +87,6 @@ public class AccountService {
         Account account = accountRepository.getReferenceById(accountId);
         System.out.println(account.toString());
         accountRepository.deleteById(accountId);
-        // accountRepository.delete(account);
-        // accountRepository.deleteByAccountId(account.getAccountId());
 
         return "Success";
     }

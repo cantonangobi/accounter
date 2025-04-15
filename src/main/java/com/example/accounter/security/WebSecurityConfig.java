@@ -41,7 +41,7 @@ public class WebSecurityConfig {
         return httpSecurity
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(registry ->{
-            registry.requestMatchers("/api/v*/registration/**", "/signup","/login", "/css/**", "/js/**").permitAll();
+            registry.requestMatchers("/api/v*/user/register/**", "/signup","/login", "/css/**", "/js/**").permitAll();
             registry.anyRequest().authenticated();
         })  
         .formLogin(httpForm ->{

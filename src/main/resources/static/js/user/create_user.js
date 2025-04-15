@@ -1,8 +1,8 @@
 const form_id = "form-signup";
-const api_url = "/api/v1/registration";
+const api_url = "/api/v1/user/register";
 const success_url = "/login";
 
-initializeForm(form_id);
+processForm(form_id);
 
 
 // const form = document.getElementById('form-signup');
