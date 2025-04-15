@@ -84,8 +84,11 @@ public class TransactionService {
         Long userId = accountService.getUser().getUserId();
         System.out.println("Test 1");
         Transaction transaction =  transactionRepository.getReferenceById(transactionId);
-        if(transaction.getUserId() == userId){
+        if(!transaction.getUserId().equals(userId)){
+            System.out.println("User id: " + userId);
             System.out.println("Tx User id: " + transaction.getUserId());
+            System.out.println("tx_uid == uid " + (transaction.getUserId().equals(userId)));
+            System.out.println("tx_uid + uid " + (transaction.getUserId() + userId));
             System.out.println("Transaction doesn't exist");
             return null;
         }
@@ -110,7 +113,7 @@ public class TransactionService {
             return "Transaction does not exist";
         }
         transactionRepository.delete(transaction);
-        return "Transaction Deleted";
+        return "Success";
     }
 
 
@@ -159,6 +162,7 @@ public class TransactionService {
         currentTransaction.setAmount(newTransaction.getAmount());
         currentTransaction.setType(newTransaction.getType());
         currentTransaction.setAccountName(newTransaction.getAccountName());
+        currentTransaction.setAccountId(newTransaction.getAccountId());
 
         transactionRepository.save(currentTransaction);
         return "Success";

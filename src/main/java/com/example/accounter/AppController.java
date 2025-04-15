@@ -22,10 +22,11 @@ public class AppController {
 
     @RequestMapping("/")
     public String index(Model model){
-        String userName = userService.getSessionUser().getUsername();
+        // String userName = userService.getSessionUser().getUsername();
+        // model.addAttribute("userName", userName);        
         List<Account> accounts = accountService.getAccounts();
         model.addAttribute("accounts", accounts);
-        model.addAttribute("userName", userName);        
+        
         return "index";
     }
 

@@ -1,7 +1,6 @@
 const form_id = "form-update-account";
 const success_url = "/account-list";
-const btn_submit = document.getElementById("btn-submit");
-const account_id = btn_submit.getAttribute("value");
+const account_id = document.getElementById("btn-submit").getAttribute("value");
 const api_url = "/api/v1/account/update/" + account_id;
 
 

@@ -35,7 +35,7 @@ public class TransactionController {
         return transactionService.createTransaction(transaction, account);
     }
 
-    @RequestMapping(path = "/gettransactions")
+    @RequestMapping(path = "/getusertransactions")
     public List<Transaction> getUserTransactions(){
         return transactionService.getUserTransactions();
     }
@@ -51,6 +51,21 @@ public class TransactionController {
 
     }    
 
+    
+    @PostMapping(path = "/update", consumes = "application/json")
+    public String updateTransaction(@RequestBody TransactionRequest request){
+        Account account = accountService.getAccount(request.getAccountName());
+        // Transaction transaction = transactionService.getById(request.getTransactionId());
+        Transaction transaction = new Transaction(account.getUserId(), 
+                                                    account.getAccountId(), 
+                                                    account.getName(),
+                                                    request.getCategory(), 
+                                                    request.getType(), 
+                                                    request.getAmount());
+
+        return transactionService.updateTransaction(request.getTransactionId(), transaction);
+    }   
+
     @DeleteMapping(path = "/delete/{id}")
     public String deleteTransaction(@PathVariable("id") Long transactionId){
         return transactionService.deleteTransactionById(transactionId);
@@ -65,19 +80,5 @@ public class TransactionController {
     public String changeBalance(@RequestBody TransactionRequest request){
         return transactionService.changeBalance(request.getAccountName(), request.getAmount());
     }
-
-    @PostMapping(path = "/update", consumes = "application/json")
-    public String updateTransaction(@RequestBody TransactionRequest request){
-        Account account = accountService.getAccount(request.getAccountName());
-        // Transaction transaction = transactionService.getById(request.getTransactionId());
-        Transaction transaction = new Transaction(account.getUserId(), 
-                                                    account.getAccountId(), 
-                                                    account.getName(),
-                                                    request.getCategory(), 
-                                                    request.getType(), 
-                                                    request.getAmount());
-
-        return transactionService.updateTransaction(request.getTransactionId(), transaction);
-    }   
 
 }

@@ -6,9 +6,13 @@ function processForm(form_id){
 
 function submitForm(){
     event.preventDefault();
-    let data = parse_form(this);
+    const formData = new FormData(this);
+    var data = JSON.stringify(Object.fromEntries(formData));
+    // var json_data = JSON.stringify(data);
     console.log(data);
-    send_to_backend(api_url, data, success_url);
+    // let data = parse_form(this);
+    // console.log(data);
+    post_request(api_url, data, success_url);
 }
 
 function parse_form(form){
@@ -19,7 +23,7 @@ function parse_form(form){
     return json_data;
 }
 
-function send_to_backend(api_url, data, success_url){
+function post_request(api_url, data, success_url){
     fetch(api_url, {
         method: 'POST',
         headers:{ 'Content-Type': 'application/json' },
@@ -37,4 +41,21 @@ function send_to_backend(api_url, data, success_url){
         }
     })
     .catch(error => console.log(error));
+}
+
+function delete_request(){
+    let is_confirmed = confirm("Are you Sure?\nThis action cannot be undone.");
+    if (is_confirmed){
+        fetch(delete_api_url, {method : "DELETE"})
+        .then(response => response.text())
+        .then(message => {
+            if (message == "Success"){
+                console.log(message);
+                window.location.href = delete_successful_url;
+            }
+            else{
+                console.log(message);
+            }
+        })
+    }
 }
