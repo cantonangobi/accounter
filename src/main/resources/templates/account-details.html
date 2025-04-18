@@ -35,14 +35,13 @@
 			</div>
 			
 			<div id="account-details" class="box-horizontal">
-				
 				<div class="box-primary box-vertical flex-left">
 					<p th:text="|Account Name: ${account.name}|" >Account Name: Account 1</p>
 					<p th:text="|Balance: KES ${account.balance}|" >Account Balance: 000000</p>
 				</div>
 				<div class="box-primary box-vertical flex-right">
-					<a th:href="|/account-update/${account.name}|" class="btn-primary ">Edit Account</a>
-					<p><button id="btn-delete" th:value="${account.accountId}" class="btn-danger">Delete Account</button></p>
+					<a th:href="|/account-update/${account.accountId}|" class="btn-primary">Edit Account</a>
+					<button id="btn-delete" th:value="${account.accountId}" class="btn-danger">Delete Account</button>
 				</div>
 			</div>
 		</div>
@@ -50,7 +49,7 @@
 		<div id="box-account-transactions" class="box-primary box-vertical">
 			<h2 th:text="|${account.name} Transactions|">Transactions</h2>
 			<hr class="full-width">
-			<a class="btn-primary ">Add Transaction</a>
+			<a class="btn-primary" href="/transaction-create">Add Transaction</a>
 			<div th:each="transaction : ${transactions}" class="list-item">
 				<span th:text="${transaction.category}" >Transaction Category</span>
 				<span th:text="${transaction.accountName}" >Account Name</span>

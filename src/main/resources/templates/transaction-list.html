@@ -65,32 +65,12 @@
 						<a class="btn-primary" th:href="|/transaction-update/${transaction.transactionId}|">
 							<i class="fa fa-pencil" aria-hidden="true"></i>
 						</a>
-						<button name="delete" th:value="${transaction.transactionId}" class="btn-danger"><i class="fa fa-trash" aria-hidden="true"></i>
+						<button name="delete" th:value="${transaction.transactionId}" class="btn-danger">
+							<i class="fa fa-trash" aria-hidden="true"></i>
 						</button>
 					</div>
 				</div>
 			</div>
-			
-		<!--	<a href="#" class="list-item">
-				<span>Transaction Category</span>
-				<span>Tx Type</span>
-				<span>Amount</span>
-			</a>
-			<div class="list-item">
-				<div class="box-vertical">
-					<span>Transaction Category</span>
-					<span>Account Name</span>
-				</div>
-				<span>Amount</span>
-			</div> -->
-			<!-- <div th:each="transaction: ${transactions}" class="list-item">
-				<div  class="box-vertical">
-					<span th:text="${transaction.category}" >Transaction Category</span>
-					<span th:text="${transaction.accountName}">Account Name</span>
-				</div>
-				<span th:text="${transaction.type}">Tx Type</span>
-				<span th:text="|KES ${transaction.amount}|">Amount</span>
-			</div> -->
 		</div>
 		
 	</div>
