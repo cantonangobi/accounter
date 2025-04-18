@@ -64,7 +64,7 @@
 					</div>
 					<!-- <span th:text="${transaction.date}" >Transaction Category</span> -->
 					<div class="box-horizontal">
-						<a class="btn-primary" th:href="|/transaction-update/${transaction.transactionId}|">
+						<a class="btn-primary" th:href="|/transaction-update/${transaction.transactionId}|" hidden>
 							<i class="fa fa-pencil" aria-hidden="true"></i>
 						</a>
 						<button name="delete" th:value="${transaction.transactionId}" class="btn-danger">
