@@ -113,7 +113,14 @@ public class TransactionService {
             System.out.println("Transaction does not exist");
             return "Transaction does not exist";
         }
+        
+        Account account = accountService.getAccount(transaction.getAccountId());
+        Double newBalance = account.getBalance() - transaction.getAmount();
+        account.setBalance(newBalance);
+        
+        accountService.updateAccount(account.getAccountId(), account);
         transactionRepository.delete(transaction);
+        
         return "Success";
     }
 
