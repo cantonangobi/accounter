@@ -57,9 +57,11 @@
 			<div  th:each="date : ${dates}"  class="box-vertical full-width date-container">
 				<div class="date-line" th:text="|${date}:|" >Date</div>
 				<div th:each="transaction : ${transactions}" th:if="${transaction.date} == ${date}"  class="list-item">
-					<span th:text="${transaction.category}" >Transaction Category</span>
-					<span th:text="${transaction.accountName}" >Account Name</span>
-					<span th:text="|KES ${transaction.amount}|" >Amount</span>
+					<div class="list-item-details">
+						<span th:text="${transaction.category}" >Transaction Category</span>
+						<span th:text="${transaction.accountName}" >Account Name</span>
+						<span th:text="|KES ${transaction.amount}|" >Amount</span>
+					</div>
 					<!-- <span th:text="${transaction.date}" >Transaction Category</span> -->
 					<div class="box-horizontal">
 						<a class="btn-primary" th:href="|/transaction-update/${transaction.transactionId}|">

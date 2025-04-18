@@ -22,7 +22,12 @@
     background-color: #F5F5F5;
     cursor: pointer;
 }
-
+.list-item-details{
+    width: 100%;
+    display: grid;
+    /* grid-template-areas: "category account amount"; */
+    grid-template-columns: 1fr 1fr 1fr;
+}
 #account-details{
     justify-content: space-between;
     width: 100%;
