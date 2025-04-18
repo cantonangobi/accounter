@@ -88,6 +88,13 @@ public class TransactionService {
         }
 
         newTransaction.setTransactionId(transactionId);
+
+        Double amount = Math.abs(newTransaction.getAmount());
+        if (newTransaction.getType() == "Expense") {
+            amount = 0 - amount;
+        }
+
+        newTransaction.setAmount(amount);
         // Transaction currentTransaction = transactionRepository.getReferenceById(transactionId);
         // currentTransaction.setCategory(newTransaction.getCategory());
         // currentTransaction.setAmount(newTransaction.getAmount());
