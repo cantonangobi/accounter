@@ -100,22 +100,58 @@ public class AppController {
     }
 
     @RequestMapping("/transaction-list")
-    public String getTransactionList(Model model){
+    public String getTransactionList(FormData data, Model model){
+        model.addAttribute("data", data);
+        data = (FormData) model.getAttribute("data");
+
+        //get accounts
         List<Account> accounts = accountService.getAccounts();
         model.addAttribute("accounts", accounts);
+        
+        //get transactions
+        List<Transaction> allTransactions = transactionService.getUserTransactions();
+        List<Transaction> selectedTransactions = new ArrayList<>();
 
-        List<Transaction> transactions = transactionService.getUserTransactions();
-        model.addAttribute("transactions", transactions);
+        // if (data.getSelectedAccounts() != null ){
+        //     //if the selections are not empty, check each transaction to see if the account name matches the selections
+        //     for (var transaction : allTransactions){
+        //         if (data.getSelectedAccounts().contains(transaction.getAccountName())){
+        //             selectedTransactions.add(transaction);
+        //         }
+        //     }
+        // }
+        if (data.getSelectedAccounts() == null || data.getSelectedAccounts().isEmpty() ){
+            //if the selections are empty, select all of them
+            selectedTransactions = allTransactions;
+            List<String> selectedAccounts = new ArrayList<>();
+            for (Account account : accounts){
+                selectedAccounts.add(account.getName());
+            }
+            data.setSelectedAccounts(selectedAccounts);
+        }
+        else{
+            for (var transaction : allTransactions){
+                if (data.getSelectedAccounts().contains(transaction.getAccountName())){
+                    selectedTransactions.add(transaction);
+                }
+            }
+        }
+
+        model.addAttribute("transactions", selectedTransactions);
 
         List<LocalDate> dates = new ArrayList<>();
-        for (Transaction transaction : transactions){
+        for (Transaction transaction : selectedTransactions){
             if (!dates.contains(transaction.getDate())){
                 dates.add(transaction.getDate());
                 System.out.println(transaction.getDate());
             }
         }
+
+        
+
         dates.sort(Collections.reverseOrder());
         model.addAttribute("dates", dates);
+    
 
         return "transaction-list";
     }

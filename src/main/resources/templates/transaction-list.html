@@ -33,24 +33,29 @@
 				Add Transaction
 			</a>
 			<hr>
-			<form class="box-vertical">
+			<form id="filters" class="box-vertical">
 				<h2>Filters</h2>
 				<fieldset >
 					<legend>Accounts</legend>
 					<div th:each="account: ${accounts}">
-						<input  th:value="${account.name}" type="checkbox"><label th:text="${account.name}">Account 1</label><br>
+						<input type="checkbox" th:field="*{data.selectedAccounts}" th:value="${account.name}"  checked>
+						<label th:text="${account.name}">Account 1</label>
+						<br>
 					</div>
 					
 					<!-- <input type="checkbox"><label>Account 2</label><br>
 					<input type="checkbox"><label>Account 3</label><br> -->
 				</fieldset>
-				<fieldset>
+				<!-- <fieldset>
 					<legend>Categories</legend>
-					<input type="checkbox"><label>Category 1</label><br>
-					<input type="checkbox"><label>Category 2</label><br>
-					<input type="checkbox"><label>Category 3</label><br>
-				</fieldset>
-				<button class="btn-primary btn-form">Filter</button>
+					<input type="checkbox" value="Food" checked><label>Food</label><br>
+					<input type="checkbox" value="Transport" checked><label>Transport</label><br>
+					<input type="checkbox" value="Home" checked><label>Home</label><br>
+					<input type="checkbox" value="Enjoyment" checked><label>Enjoyment</label><br>
+					<input type="checkbox" value="Other" checked><label>Other</label><br>
+					<input type="checkbox" value="Income" checked><label>Income</label><br>
+				</fieldset> -->
+				<button class="btn-primary btn-form" type="submit">Filter</button>
 			</form>
 		</div>
 		<div  class="box-vertical box-primary cols-3">
