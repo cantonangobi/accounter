@@ -36,12 +36,17 @@
 			
 			<div id="account-details" class="box-horizontal">
 				<div class="box-primary box-vertical flex-left">
-					<p th:text="|Account Name: ${account.name}|" >Account Name: Account 1</p>
-					<p th:text="|Balance: KES ${account.balance}|" >Account Balance: 000000</p>
+					<span th:text="|Account Name: ${account.name}|" style="margin-bottom: 20px;">Account Name: Account 1</span>
+					<span th:text="|Balance: KES ${account.balance}|" style="margin-top: 20px;">Account Balance: 000000</span>
 				</div>
-				<div class="box-primary box-vertical flex-right">
-					<a th:href="|/account-update/${account.accountId}|" class="btn-primary">Edit Account</a>
-					<button id="btn-delete" th:value="${account.accountId}" class="btn-danger">Delete Account</button>
+				<div class="box-secondary box-vertical flex-right">
+					<span>
+						<a th:href="|/account-update/${account.accountId}|" class="btn-primary">Edit Account</a>
+					</span>
+					<span>
+						<button id="btn-delete" th:value="${account.accountId}" class="btn-danger" >Delete Account</button>
+					</span>
+					
 				</div>
 			</div>
 		</div>

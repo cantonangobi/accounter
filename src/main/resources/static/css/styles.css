@@ -59,8 +59,8 @@ input,select{
 .box-primary{
     align-items: center;
     background-color: #EEE;
-    margin: 15px 5px;
-    padding: 10px;
+    margin: 10px 5px;
+    padding: 5px 10px;
     border-radius: 10px; 
 }
 
@@ -80,7 +80,7 @@ input,select{
 /* sidebar */
 .sidebar {
     flex: 1;
-    min-height: 100vh;
+    min-height: 85vh;
     
 }
 .sidebar h1,h2{
@@ -165,8 +165,8 @@ input,select{
 
 .margin-auto{
     margin-right: auto;
-    /* margin-top: 0;
-    margin-bottom: 0; */
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .fill-width{
     width: 100%;
@@ -221,7 +221,7 @@ input,select{
 
 #logout {
     /* display: flex; */
-    margin-right: 20px;
+    margin-right: 30px;
     margin-left: auto;
     text-decoration: none;
     color: inherit;
