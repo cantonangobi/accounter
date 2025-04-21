@@ -51,9 +51,23 @@
 			<hr class="full-width">
 			<a class="btn-primary" href="/transaction-create">Add Transaction</a>
 			<div th:each="transaction : ${transactions}" class="list-item">
-				<span th:text="${transaction.category}" >Transaction Category</span>
+				<!-- <span th:text="${transaction.category}" >Transaction Category</span>
 				<span th:text="${transaction.accountName}" >Account Name</span>
-				<span th:text="|KES ${transaction.amount}|" >Amount</span>
+				<span th:text="|KES ${transaction.amount}|" >Amount</span> -->
+				<div class="list-item-details">
+					<span th:text="${transaction.category}">Transaction Category</span>
+					<span th:text="${transaction.accountName}" >Account Name</span>
+					<span th:text="|KES ${transaction.amount}|" >Amount</span>
+				</div>
+				<!-- <span th:text="${transaction.date}" >Transaction Category</span> -->
+				<div class="box-horizontal">
+					<a class="btn-primary" th:href="|/transaction-update/${transaction.transactionId}|" hidden>
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+					</a>
+					<button name="delete" th:value="${transaction.transactionId}" class="btn-danger">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</div>
 			</div>
 			<!-- <div th:each="transaction: ${transactions}" class="list-item">
 				<div  class="box-vertical">
