@@ -95,13 +95,6 @@ public class TransactionService {
         }
 
         newTransaction.setAmount(amount);
-        // Transaction currentTransaction = transactionRepository.getReferenceById(transactionId);
-        // currentTransaction.setCategory(newTransaction.getCategory());
-        // currentTransaction.setAmount(newTransaction.getAmount());
-        // currentTransaction.setType(newTransaction.getType());
-        // currentTransaction.setAccountName(newTransaction.getAccountName());
-        // currentTransaction.setAccountId(newTransaction.getAccountId());
-        // currentTransaction.set
 
         transactionRepository.save(newTransaction);
         return "Success";
