@@ -22,9 +22,7 @@ public class AppController {
     private TransactionService transactionService;
 
     @RequestMapping("/")
-    public String index(Model model){
-        // String userName = userService.getSessionUser().getUsername();
-        // model.addAttribute("userName", userName);        
+    public String index(Model model){       
         List<Account> accounts = accountService.getAccounts();
         model.addAttribute("accounts", accounts);
         
@@ -112,14 +110,6 @@ public class AppController {
         List<Transaction> allTransactions = transactionService.getUserTransactions();
         List<Transaction> selectedTransactions = new ArrayList<>();
 
-        // if (data.getSelectedAccounts() != null ){
-        //     //if the selections are not empty, check each transaction to see if the account name matches the selections
-        //     for (var transaction : allTransactions){
-        //         if (data.getSelectedAccounts().contains(transaction.getAccountName())){
-        //             selectedTransactions.add(transaction);
-        //         }
-        //     }
-        // }
         if (data.getSelectedAccounts() == null || data.getSelectedAccounts().isEmpty() ){
             //if the selections are empty, select all of them
             selectedTransactions = allTransactions;

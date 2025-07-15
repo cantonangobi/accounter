@@ -64,14 +64,14 @@ public class AccountController {
 
     
 
-    @RequestMapping("/displayaccounts")
-    public String accounts(){   
-        List<Account> accountList = accountService.getAccounts();
-        String result = "";
-        for (Account acc : accountList){
-            result += acc.toString() + "\n";
-        }
-        return result;
-    }
+    // @RequestMapping("/displayaccounts")
+    // public String accounts(){   
+    //     List<Account> accountList = accountService.getAccounts();
+    //     String result = "";
+    //     for (Account acc : accountList){
+    //         result += acc.toString() + "\n";
+    //     }
+    //     return result;
+    // }
 
 }

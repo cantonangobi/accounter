@@ -35,11 +35,6 @@ public class Transaction {
     private Double amount;
     private LocalDate date;
 
-    // public Transaction(String type, Double amount, Double balance){
-    //     this.type = type;
-    //     this.amount = amount;
-    //     this.balance = balance;
-    // }
     
     public Transaction(Long userId, Long accountId, String accountName, String category, String type, Double amount, LocalDate date){
         this.userId = userId;
